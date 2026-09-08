@@ -3706,3 +3706,43 @@ body.command-open {
     padding-inline: 18px;
   }
 }
+
+/* =========================================================
+   Final mobile sticky navigation fix
+   Keep both the home navigation and project header sticky in
+   portrait mode. This block intentionally lives at the end of
+   the stylesheet so it overrides earlier mobile media rules.
+   ========================================================= */
+@media (max-width: 720px) {
+  /* Avoid creating a horizontal scroll container that can
+     interfere with sticky positioning in mobile Safari. */
+  html,
+  body {
+    overflow-x: clip;
+  }
+
+  .header,
+  .case-header {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 900;
+  }
+
+  .header {
+    background: rgba(11, 17, 25, 0.92);
+    backdrop-filter: blur(18px) saturate(130%);
+    -webkit-backdrop-filter: blur(18px) saturate(130%);
+  }
+
+  .case-header {
+    background: rgba(11, 17, 25, 0.94);
+    backdrop-filter: blur(18px) saturate(130%);
+    -webkit-backdrop-filter: blur(18px) saturate(130%);
+  }
+
+  /* Keep the scroll indicator above the sticky navigation. */
+  .scroll-progress {
+    z-index: 1200;
+  }
+}

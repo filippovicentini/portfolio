@@ -281,5 +281,80 @@
     </div>
    </footer>
   </main>
+  <!-- Command palette: Ctrl/Cmd + K -->
+  <button class="command-trigger" type="button" aria-haspopup="dialog" aria-controls="command-palette" aria-label="Open command palette">
+   <span class="command-trigger-icon" aria-hidden="true">&gt;_</span>
+   <span class="command-trigger-shortcut">Ctrl K</span>
+  </button>
+
+  <div class="command-overlay" id="command-palette" role="dialog" aria-modal="true" aria-labelledby="command-title" hidden>
+   <div class="command-panel" role="document">
+    <div class="command-search-wrap">
+     <span class="command-search-icon" aria-hidden="true">&gt;_</span>
+     <input id="command-search" class="command-search" type="search" autocomplete="off" spellcheck="false" placeholder="Where do you want to go?" aria-label="Search portfolio commands">
+     <kbd>Esc</kbd>
+    </div>
+
+    <div class="command-results" id="command-results">
+     <section class="command-group" data-command-group>
+      <p class="command-group-label">Navigate</p>
+      <a class="command-item" href="../index.html#progetti" data-command-item data-keywords="projects case studies work portfolio">
+       <span class="command-item-icon" aria-hidden="true">01</span>
+       <span><strong>Projects</strong><small>Explore featured case studies</small></span>
+       <span class="command-arrow" aria-hidden="true">&rarr;</span>
+      </a>
+      <a class="command-item" href="../index.html#esperienza" data-command-item data-keywords="experience work career manni sipre">
+       <span class="command-item-icon" aria-hidden="true">02</span>
+       <span><strong>Experience</strong><small>Professional journey and current role</small></span>
+       <span class="command-arrow" aria-hidden="true">&rarr;</span>
+      </a>
+      <a class="command-item" href="../index.html#competenze" data-command-item data-keywords="skills machine learning computer vision generative ai mlops">
+       <span class="command-item-icon" aria-hidden="true">03</span>
+       <span><strong>Skills</strong><small>ML, Computer Vision, GenAI and deployment</small></span>
+       <span class="command-arrow" aria-hidden="true">&rarr;</span>
+      </a>
+      <a class="command-item" href="../index.html#education" data-command-item data-keywords="education certifications university degree coursera ibm">
+       <span class="command-item-icon" aria-hidden="true">04</span>
+       <span><strong>Education &amp; Certifications</strong><small>Academic background and credentials</small></span>
+       <span class="command-arrow" aria-hidden="true">&rarr;</span>
+      </a>
+      <a class="command-item" href="../index.html#contact" data-command-item data-keywords="contact email opportunities collaborate">
+       <span class="command-item-icon" aria-hidden="true">05</span>
+       <span><strong>Contact</strong><small>Get in touch</small></span>
+       <span class="command-arrow" aria-hidden="true">&rarr;</span>
+      </a>
+     </section>
+
+     <section class="command-group" data-command-group>
+      <p class="command-group-label">Quick actions</p>
+      <a class="command-item" href="../cv-filippo-vicentini.pdf" target="_blank" rel="noreferrer" data-command-item data-keywords="cv resume curriculum download pdf">
+       <span class="command-item-icon command-item-icon--action" aria-hidden="true">CV</span>
+       <span><strong>View CV</strong><small>Open curriculum vitae</small></span>
+       <span class="command-arrow" aria-hidden="true">↗</span>
+      </a>
+      <a class="command-item" href="https://github.com/filippovicentini" target="_blank" rel="noreferrer" data-command-item data-keywords="github code repositories">
+       <span class="command-item-icon command-item-icon--action" aria-hidden="true">GH</span>
+       <span><strong>GitHub</strong><small>Browse repositories</small></span>
+       <span class="command-arrow" aria-hidden="true">↗</span>
+      </a>
+      <a class="command-item" href="https://www.linkedin.com/in/filippo-vicentini-9594b5220" target="_blank" rel="noreferrer" data-command-item data-keywords="linkedin profile network">
+       <span class="command-item-icon command-item-icon--action" aria-hidden="true">IN</span>
+       <span><strong>LinkedIn</strong><small>Open professional profile</small></span>
+       <span class="command-arrow" aria-hidden="true">↗</span>
+      </a>
+     </section>
+
+     <p class="command-empty" id="command-empty" hidden>No matching command.</p>
+    </div>
+
+    <div class="command-footer">
+     <span><kbd>&uarr;</kbd><kbd>&darr;</kbd> navigate</span>
+     <span><kbd>Enter</kbd> open</span>
+     <span class="command-footer-brand">fv<span>.</span></span>
+    </div>
+   </div>
+  </div>
+  <script src="../script.js"></script>
+
  </body>
 </html>

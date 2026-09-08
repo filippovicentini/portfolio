@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <meta content="#0b1119" name="theme-color"/>
+  <meta content="An end-to-end data analysis project on Amazon India sales, combining data cleaning, exploratory visualization, order-cancellation modeling, and an interactive Streamlit presentation." name="description"/>
+  <title>
+   Amazon Sales Analysis | Filippo Vicentini
+  </title>
+  <link href="../favicon.svg" rel="icon" type="image/svg+xml"/>
+  <link href="../styles.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <a class="skip" href="#main">
+   Skip to content
+  </a>
+  <header class="case-header wrap">
+   <a aria-label="Back to portfolio" class="brand" href="../index.html">
+    fv
+    <span>
+     .
+    </span>
+   </a>
+   <div class="case-header-actions">
+    <a aria-label="Back to all projects" class="case-back" href="../index.html#progetti">
+     <svg aria-hidden="true" fill="none" height="17" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="17">
+      <path d="M19 12H5">
+      </path>
+      <path d="m12 19-7-7 7-7">
+      </path>
+     </svg>
+     <span>
+      All projects
+     </span>
+    </a>
+    <a aria-label="Open GitHub repository" class="case-external" href="https://github.com/filippovicentini/AmazonSales" rel="noreferrer" target="_blank">
+     <span>
+      GitHub
+     </span>
+     <svg aria-hidden="true" fill="none" height="17" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="17">
+      <path d="M7 17 17 7">
+      </path>
+      <path d="M7 7h10v10">
+      </path>
+     </svg>
+    </a>
+   </div>
+  </header>
+  <main id="main">
+   <section class="case-hero">
+    <div class="wrap case-hero-inner">
+     <span class="case-kicker">
+      04 / DATA ANALYSIS / E-COMMERCE
+     </span>
+     <h1>
+      Amazon Sales Analysis
+     </h1>
+     <p class="case-lead">
+      An end-to-end data analysis project on Amazon India sales, combining data cleaning, exploratory visualization, order-cancellation modeling, and an interactive Streamlit presentation.
+     </p>
+     <div class="case-meta">
+      <article>
+       <span>
+        Context
+       </span>
+       <strong>
+        Personal / academic data project &middot; Amazon India sales
+       </strong>
+      </article>
+      <article>
+       <span>
+        My role
+       </span>
+       <strong>
+        Cleaning &middot; EDA &middot; Visualization &middot; Classification &middot; App
+       </strong>
+      </article>
+      <article>
+       <span>
+        Output
+       </span>
+       <strong>
+        Interactive analysis and cancellation prediction
+       </strong>
+      </article>
+     </div>
+    </div>
+   </section>
+   <div class="wrap case-content">
+    <article class="case-main">
+     <section>
+      <h2>
+       The dataset
+      </h2>
+      <p>
+       The project uses the Amazon Sales Report dataset from Kaggle, containing sales information from
+       <strong>
+        Amazon India between April and June 2022
+       </strong>.
+      </p>
+      <p>
+       The goal was broader than creating charts: first make the dataset analysis-ready, then explore commercial patterns, and finally investigate whether an order rejection/cancellation event could be predicted.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Data preparation
+      </h2>
+      <ul class="case-list">
+       <li>
+        Removed columns with little analytical value or effectively constant information.
+       </li>
+       <li>
+        Handled missing values in fields such as courier status, promotion identifiers, amount, and shipping information.
+       </li>
+       <li>
+        Renamed and transformed variables to make the dataset easier to analyze, including customer type and order amount.
+       </li>
+       <li>
+        Created a month variable for aggregation and ordered product sizes for more meaningful analysis.
+       </li>
+      </ul>
+     </section>
+     <section>
+      <h2>
+       Analysis and modeling
+      </h2>
+      <div class="case-numbered">
+       <article class="case-step">
+        <h3>
+         Explore commercial behavior
+        </h3>
+        <p>
+         Build visual analyses around net revenue, average monthly order amount, top products, sales by product size, sales over time, and category-level order trends.
+        </p>
+       </article>
+       <article class="case-step">
+        <h3>
+         Predict rejected orders
+        </h3>
+        <p>
+         Frame order rejection as a classification problem and compare Logistic Regression with Random Forest.
+        </p>
+       </article>
+       <article class="case-step">
+        <h3>
+         Understand the drivers
+        </h3>
+        <p>
+         Use the classification workflow not only to predict the event, but also to investigate which features contribute most to the outcome.
+        </p>
+       </article>
+       <article class="case-step">
+        <h3>
+         Present the work interactively
+        </h3>
+        <p>
+         Package the analysis into a Streamlit presentation so users can explore results without opening notebooks directly.
+        </p>
+       </article>
+      </div>
+      <div class="case-callout">
+       <p>
+        The project combines three skills that are often separated in coursework: preparing messy business data, extracting readable insights, and building a predictive model around a concrete event.
+       </p>
+      </div>
+     </section>
+    </article>
+    <aside class="case-side">
+     <div class="case-side-inner">
+      <div class="case-side-card">
+       <span class="case-side-label">
+        Tech stack
+       </span>
+       <ul class="tags">
+        <li>
+         Python
+        </li>
+        <li>
+         Pandas
+        </li>
+        <li>
+         Scikit-learn
+        </li>
+        <li>
+         Streamlit
+        </li>
+        <li>
+         Logistic Regression
+        </li>
+        <li>
+         Random Forest
+        </li>
+       </ul>
+      </div>
+      <div class="case-side-card">
+       <span class="case-side-label">
+        Project focus
+       </span>
+       <p>
+        Connecting descriptive analytics and predictive modeling in the same project, then presenting the results through an interactive interface.
+       </p>
+       <a href="https://github.com/filippovicentini/AmazonSales" rel="noreferrer" target="_blank">
+        Open repository
+        <svg aria-hidden="true" fill="none" height="17" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="17">
+         <path d="M7 17 17 7">
+         </path>
+         <path d="M7 7h10v10">
+         </path>
+        </svg>
+       </a>
+      </div>
+     </div>
+    </aside>
+   </div>
+   <section class="case-next">
+    <div class="wrap case-next-grid">
+     <a href="./rain-prediction.html">
+      <span>
+       PREVIOUS PROJECT
+      </span>
+      <strong>
+       &larr; Machine Learning for Rain Prediction
+      </strong>
+     </a>
+     <a href="./robotics-anomaly-detection.html">
+      <span>
+       NEXT PROJECT
+      </span>
+      <strong>
+       Anomaly Detection in Robotics &rarr;
+      </strong>
+     </a>
+    </div>
+   </section>
+   <footer id="contact" class="contact-footer">
+    <div class="wrap">
+     <p class="eyebrow">CONTACT</p>
+     <h2 class="contact-title">Get in Touch<span>.</span></h2>
+
+     <div class="contact-grid" aria-label="Contact links">
+      <a class="contact-card" href="https://www.linkedin.com/in/filippo-vicentini-9594b5220" target="_blank" rel="noreferrer" aria-label="Open Filippo Vicentini on LinkedIn">
+       <span class="contact-card-icon" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+         <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/>
+         <rect x="2" y="9" width="4" height="12"/>
+         <circle cx="4" cy="4" r="2"/>
+        </svg>
+       </span>
+       <strong>Filippo Vicentini</strong>
+       <span class="contact-card-label">LINKEDIN</span>
+      </a>
+
+      <a class="contact-card" href="mailto:pippovice@gmail.com" aria-label="Send an email to pippovice@gmail.com">
+       <span class="contact-card-icon" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+         <rect x="3" y="5" width="18" height="14" rx="2"/>
+         <path d="m3 7 9 6 9-6"/>
+        </svg>
+       </span>
+       <strong>pippovice@gmail.com</strong>
+       <span class="contact-card-label">EMAIL</span>
+      </a>
+
+      <a class="contact-card" href="https://github.com/filippovicentini" target="_blank" rel="noreferrer" aria-label="Open filippovicentini on GitHub">
+       <span class="contact-card-icon" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+         <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3.3-.4 6.8-1.6 6.8-7A5.4 5.4 0 0 0 19.4 4 5 5 0 0 0 19.3.5S18.2.1 15 1.8a13.4 13.4 0 0 0-7 0C4.8.1 3.7.5 3.7.5A5 5 0 0 0 3.6 4a5.4 5.4 0 0 0-1.4 3.7c0 5.4 3.5 6.6 6.8 7A4.8 4.8 0 0 0 8 18v4"/>
+         <path d="M8 19c-3 .9-3-1.5-4-2"/>
+        </svg>
+       </span>
+       <strong>filippovicentini</strong>
+       <span class="contact-card-label">GITHUB</span>
+      </a>
+     </div>
+
+     <div class="footer-bottom footer-bottom--minimal">
+      <span>&copy; 2026 Filippo Vicentini. All rights reserved.</span>
+     </div>
+    </div>
+   </footer>
+  </main>
+ </body>
+</html>

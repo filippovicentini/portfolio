@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <meta content="#0b1119" name="theme-color"/>
+  <meta content="A Probability for Data Science project comparing the cover time of a single random walk with multiple parallel random walks on complete graphs." name="description"/>
+  <title>
+   Single vs Parallel Random Walks | Filippo Vicentini
+  </title>
+  <link href="../favicon.svg" rel="icon" type="image/svg+xml"/>
+  <link href="../styles.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <a class="skip" href="#main">
+   Skip to content
+  </a>
+  <header class="case-header wrap">
+   <a aria-label="Back to portfolio" class="brand" href="../index.html">
+    fv
+    <span>
+     .
+    </span>
+   </a>
+   <div class="case-header-actions">
+    <a aria-label="Back to all projects" class="case-back" href="../index.html#progetti">
+     <svg aria-hidden="true" fill="none" height="17" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="17">
+      <path d="M19 12H5">
+      </path>
+      <path d="m12 19-7-7 7-7">
+      </path>
+     </svg>
+     <span>
+      All projects
+     </span>
+    </a>
+    <a aria-label="Open GitHub repository" class="case-external" href="https://github.com/filippovicentini/single-vs-parallel-random-walk" rel="noreferrer" target="_blank">
+     <span>
+      GitHub
+     </span>
+     <svg aria-hidden="true" fill="none" height="17" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="17">
+      <path d="M7 17 17 7">
+      </path>
+      <path d="M7 7h10v10">
+      </path>
+     </svg>
+    </a>
+   </div>
+  </header>
+  <main id="main">
+   <section class="case-hero">
+    <div class="wrap case-hero-inner">
+     <span class="case-kicker">
+      06 / PROBABILITY / SIMULATION
+     </span>
+     <h1>
+      Single vs Parallel Random Walks
+     </h1>
+     <p class="case-lead">
+      A simulation study of graph cover time, showing how parallel exploration can dramatically change the scaling behavior of a random-walk process.
+     </p>
+     <div class="case-meta">
+      <article>
+       <span>
+        Context
+       </span>
+       <strong>
+        Probability for Data Science &middot; University of Verona
+       </strong>
+      </article>
+      <article>
+       <span>
+        My role
+       </span>
+       <strong>
+        Simulation &middot; Analysis &middot; Visualization
+       </strong>
+      </article>
+      <article>
+       <span>
+        Output
+       </span>
+       <strong>
+        Jupyter Notebook comparing theoretical and empirical cover-time scaling
+       </strong>
+      </article>
+     </div>
+    </div>
+   </section>
+   <div class="wrap case-content">
+    <article class="case-main">
+     <section>
+      <h2>
+       Overview
+      </h2>
+      <p>
+       A random walk is one of the simplest stochastic processes, but its behavior becomes much more interesting when the goal is to
+       <strong>
+        visit every node of a graph
+       </strong>. The number of steps required to do this is known as the
+       <strong>
+        cover time
+       </strong>.
+      </p>
+      <p>
+       For this university project, developed for the
+       <strong>
+        Probability for Data Science
+       </strong>
+       course at the University of Verona, I used simulations on complete graphs to compare a
+       <strong>
+        single random walk
+       </strong>
+       with
+       <strong>
+        multiple independent walks running in parallel
+       </strong>.
+      </p>
+     </section>
+     <section>
+      <h2>
+       The question
+      </h2>
+      <p>
+       The main question was simple:
+       <strong>
+        how much faster can a graph be explored when several random walks operate at the same time?
+       </strong>
+      </p>
+      <p>
+       Rather than treating the theoretical result only as a formula, I built numerical experiments that make the difference in scaling visible. This allowed me to compare empirical cover times with the expected asymptotic behavior as the graph size increases.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Experiment design
+      </h2>
+      <div class="case-numbered">
+       <article class="case-step">
+        <h3>
+         Simulate one random walk
+        </h3>
+        <p>
+         Start from a node of a complete graph and repeatedly move to a randomly selected neighbor until every node has been visited.
+        </p>
+       </article>
+       <article class="case-step">
+        <h3>
+         Measure cover time
+        </h3>
+        <p>
+         Record the number of steps required to cover the graph and repeat the experiment across increasing graph sizes.
+        </p>
+       </article>
+       <article class="case-step">
+        <h3>
+         Introduce parallel exploration
+        </h3>
+        <p>
+         Run multiple independent random walks simultaneously and stop when the union of all visited nodes covers the graph.
+        </p>
+       </article>
+       <article class="case-step">
+        <h3>
+         Compare with theory
+        </h3>
+        <p>
+         Compare the simulated results with the expected
+         <strong>
+          n log n
+         </strong>
+         behavior for one walk and
+         <strong>
+          log n
+         </strong>
+         behavior when the number of parallel walks scales with the graph size.
+        </p>
+       </article>
+      </div>
+     </section>
+     <section>
+      <h2>
+       Effect of parallelism
+      </h2>
+      <p>
+       The first experiment keeps the underlying exploration problem fixed while increasing the number of walks running in parallel. The reduction in cover time is immediate: the largest gains occur when moving from very few walks to a small parallel group, followed by progressively smaller improvements as more walks are added.
+      </p>
+      <div class="case-visual-grid case-visual-grid--stacked">
+       <figure class="case-figure">
+        <img alt="Line chart showing cover time decreasing as the number of parallel random walks increases." decoding="async" height="687" loading="lazy" src="../images/random-walk/cover-time-vs-parallel-walks.png" width="1209"/>
+        <figcaption>
+         <strong>
+          Cover time vs. number of parallel walks.
+         </strong>
+         Increasing the number of simultaneous explorers substantially reduces the number of steps needed to cover the graph, with diminishing returns as parallelism grows.
+        </figcaption>
+       </figure>
+      </div>
+     </section>
+     <section>
+      <h2>
+       Empirical scaling vs. theory
+      </h2>
+      <p>
+       The most important result is the change in asymptotic behavior. The simulations closely follow the expected theoretical trends: a single walk grows approximately like
+       <strong>
+        n log n
+       </strong>, while using
+       <strong>
+        k = n
+       </strong>
+       parallel walks produces behavior consistent with
+       <strong>
+        log n
+       </strong>.
+      </p>
+      <div class="case-visual-grid case-visual-grid--stacked">
+       <figure class="case-figure">
+        <img alt="Two charts comparing single random walk cover time with n log n scaling and parallel random walk cover time with log n scaling." decoding="async" height="593" loading="lazy" src="../images/random-walk/single-vs-parallel-scaling.png" width="1184"/>
+        <figcaption>
+         <strong>
+          Single vs. parallel scaling.
+         </strong>
+         On the left, the empirical single-walk cover time tracks a constant multiple of
+         <em>
+          n log n
+         </em>. On the right, with one parallel walk per node, the observed cover time follows a logarithmic growth pattern.
+        </figcaption>
+       </figure>
+      </div>
+     </section>
+     <section>
+      <h2>
+       Key takeaway
+      </h2>
+      <p>
+       The project makes an abstract probabilistic result visually intuitive: parallelism does more than reduce a constant factor. Under the studied setup, it changes the way the cover time grows with the size of the graph.
+      </p>
+      <ul class="case-list">
+       <li>
+        Single-walk exploration becomes increasingly expensive as the graph grows.
+       </li>
+       <li>
+        Parallel exploration dramatically reduces the time required to visit the full graph.
+       </li>
+       <li>
+        Simulation provides a practical way to validate and communicate asymptotic results.
+       </li>
+       <li>
+        The project combines probability, graph algorithms, numerical experimentation, and scientific visualization.
+       </li>
+      </ul>
+      <div class="case-callout">
+       <p>
+        What I found most interesting was seeing a theoretical scaling law emerge directly from simulation: computation turned an asymptotic probability result into something measurable and visually clear.
+       </p>
+      </div>
+     </section>
+    </article>
+    <aside class="case-side">
+     <div class="case-side-inner">
+      <div class="case-side-card">
+       <span class="case-side-label">
+        Tech stack
+       </span>
+       <ul class="tags">
+        <li>
+         Python
+        </li>
+        <li>
+         NetworkX
+        </li>
+        <li>
+         NumPy
+        </li>
+        <li>
+         Matplotlib
+        </li>
+        <li>
+         Jupyter Notebook
+        </li>
+       </ul>
+      </div>
+      <div class="case-side-card">
+       <span class="case-side-label">
+        Main result
+       </span>
+       <p>
+        Empirical simulations illustrate the transition from approximately
+        <strong>
+         n log n
+        </strong>
+        cover-time growth for a single walk to approximately
+        <strong>
+         log n
+        </strong>
+        when using k = n parallel walks.
+       </p>
+      </div>
+      <div class="case-side-card">
+       <span class="case-side-label">
+        Repository
+       </span>
+       <p>
+        The complete notebook, simulation code, and analysis are publicly available on GitHub.
+       </p>
+       <a href="https://github.com/filippovicentini/single-vs-parallel-random-walk" rel="noreferrer" target="_blank">
+        Open repository
+        <svg aria-hidden="true" fill="none" height="17" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="17">
+         <path d="M7 17 17 7">
+         </path>
+         <path d="M7 7h10v10">
+         </path>
+        </svg>
+       </a>
+      </div>
+     </div>
+    </aside>
+   </div>
+   <section class="case-next">
+    <div class="wrap case-next-grid">
+     <a href="./robotics-anomaly-detection.html">
+      <span>
+       PREVIOUS PROJECT
+      </span>
+      <strong>
+       &larr; Anomaly Detection in Robotics
+      </strong>
+     </a>
+     <a href="./industrial-processing-times.html">
+      <span>
+       NEXT PROJECT
+      </span>
+      <strong>
+       Predicting Industrial Processing Times &rarr;
+      </strong>
+     </a>
+    </div>
+   </section>
+   <footer id="contact" class="contact-footer">
+    <div class="wrap">
+     <p class="eyebrow">CONTACT</p>
+     <h2 class="contact-title">Get in Touch<span>.</span></h2>
+
+     <div class="contact-grid" aria-label="Contact links">
+      <a class="contact-card" href="https://www.linkedin.com/in/filippo-vicentini-9594b5220" target="_blank" rel="noreferrer" aria-label="Open Filippo Vicentini on LinkedIn">
+       <span class="contact-card-icon" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+         <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/>
+         <rect x="2" y="9" width="4" height="12"/>
+         <circle cx="4" cy="4" r="2"/>
+        </svg>
+       </span>
+       <strong>Filippo Vicentini</strong>
+       <span class="contact-card-label">LINKEDIN</span>
+      </a>
+
+      <a class="contact-card" href="mailto:pippovice@gmail.com" aria-label="Send an email to pippovice@gmail.com">
+       <span class="contact-card-icon" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+         <rect x="3" y="5" width="18" height="14" rx="2"/>
+         <path d="m3 7 9 6 9-6"/>
+        </svg>
+       </span>
+       <strong>pippovice@gmail.com</strong>
+       <span class="contact-card-label">EMAIL</span>
+      </a>
+
+      <a class="contact-card" href="https://github.com/filippovicentini" target="_blank" rel="noreferrer" aria-label="Open filippovicentini on GitHub">
+       <span class="contact-card-icon" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+         <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3.3-.4 6.8-1.6 6.8-7A5.4 5.4 0 0 0 19.4 4 5 5 0 0 0 19.3.5S18.2.1 15 1.8a13.4 13.4 0 0 0-7 0C4.8.1 3.7.5 3.7.5A5 5 0 0 0 3.6 4a5.4 5.4 0 0 0-1.4 3.7c0 5.4 3.5 6.6 6.8 7A4.8 4.8 0 0 0 8 18v4"/>
+         <path d="M8 19c-3 .9-3-1.5-4-2"/>
+        </svg>
+       </span>
+       <strong>filippovicentini</strong>
+       <span class="contact-card-label">GITHUB</span>
+      </a>
+     </div>
+
+     <div class="footer-bottom footer-bottom--minimal">
+      <span>&copy; 2026 Filippo Vicentini. All rights reserved.</span>
+     </div>
+    </div>
+   </footer>
+  </main>
+ </body>
+</html>

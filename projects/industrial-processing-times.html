@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <meta content="#0b1119" name="theme-color"/>
+  <meta content="An end-to-end Machine Learning project focused on estimating industrial machine processing times, evaluating prediction quality and explainability, and deploying the resulting model as a service." name="description"/>
+  <title>
+   Predicting Industrial Processing Times | Filippo Vicentini
+  </title>
+  <link href="../favicon.svg" rel="icon" type="image/svg+xml"/>
+  <link href="../styles.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <a class="skip" href="#main">
+   Skip to content
+  </a>
+  <header class="case-header wrap">
+   <a aria-label="Back to portfolio" class="brand" href="../index.html">
+    fv
+    <span>
+     .
+    </span>
+   </a>
+   <div class="case-header-actions">
+    <a aria-label="Back to all projects" class="case-back" href="../index.html#progetti">
+     <svg aria-hidden="true" fill="none" height="17" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="17">
+      <path d="M19 12H5">
+      </path>
+      <path d="m12 19-7-7 7-7">
+      </path>
+     </svg>
+     <span>
+      All projects
+     </span>
+    </a>
+   </div>
+  </header>
+  <main id="main">
+   <section class="case-hero">
+    <div class="wrap case-hero-inner">
+     <span class="case-kicker">
+      01 / MACHINE LEARNING / INDUSTRY
+     </span>
+     <h1>
+      Predicting Industrial Processing Times
+     </h1>
+     <p class="case-lead">
+      An end-to-end Machine Learning project focused on estimating machine processing times from structural and operational data, from model comparison and explainability to deployment on a Linux server.
+     </p>
+     <div class="case-meta">
+      <article>
+       <span>
+        Context
+       </span>
+       <strong>
+        Master's thesis &middot; University of Verona &times; Manni Sipre
+       </strong>
+      </article>
+      <article>
+       <span>
+        My role
+       </span>
+       <strong>
+        Data preparation &middot; Modeling &middot; Evaluation &middot; Explainability &middot; Deployment
+       </strong>
+      </article>
+      <article>
+       <span>
+        Output
+       </span>
+       <strong>
+        Prediction service for industrial use
+       </strong>
+      </article>
+     </div>
+    </div>
+   </section>
+   <div class="wrap case-content">
+    <article class="case-main">
+     <section>
+      <h2>
+       Overview
+      </h2>
+      <p>
+       In production environments, processing-time estimates directly affect planning, scheduling, and the ability to provide reliable expectations to downstream processes. The objective of this project was to use historical structural and operational information to
+       <strong>
+        predict machine processing times
+       </strong>
+       more consistently than a purely manual or rule-based estimation approach.
+      </p>
+      <p>
+       The work covered the full ML lifecycle: data preparation, model comparison, validation, model explainability, API development, containerization, and deployment.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Approach
+      </h2>
+      <div class="case-numbered">
+       <article class="case-step">
+        <h3>
+         Prepare the data
+        </h3>
+        <p>
+         Organize structural and operational features, engineer useful predictors, handle preprocessing, and define reliable train and validation splits.
+        </p>
+       </article>
+       <article class="case-step">
+        <h3>
+         Compare regression models
+        </h3>
+        <p>
+         Evaluate multiple regression approaches, including tree-based and boosting methods, rather than assuming a single algorithm would work best.
+        </p>
+       </article>
+       <article class="case-step">
+        <h3>
+         Evaluate and explain the predictions
+        </h3>
+        <p>
+         Measure prediction quality with MAE, RMSE, R&sup2;, and MAPE, inspect predicted-versus-actual behavior, and use SHAP to understand how input features influence the output.
+        </p>
+       </article>
+       <article class="case-step">
+        <h3>
+         Move beyond the notebook
+        </h3>
+        <p>
+         Expose the selected prediction workflow through FastAPI, containerize the application with Docker, and deploy it on a Linux server so it could be integrated into other systems.
+        </p>
+       </article>
+      </div>
+     </section>
+     <section>
+      <h2>
+       Validation results
+      </h2>
+      <p>
+       The validation metrics show that the model captures most of the variability in processing time while keeping the average percentage error at roughly eight percent.
+      </p>
+      <div class="case-metrics">
+       <article class="case-metric">
+        <span>
+         Validation R&sup2;
+        </span>
+        <strong>
+         0.932
+        </strong>
+       </article>
+       <article class="case-metric">
+        <span>
+         Validation MAPE
+        </span>
+        <strong>
+         8.00%
+        </strong>
+       </article>
+       <article class="case-metric">
+        <span>
+         Validation MAE
+        </span>
+        <strong>
+         91.2 s
+        </strong>
+       </article>
+       <article class="case-metric">
+        <span>
+         Validation RMSE
+        </span>
+        <strong>
+         165.4 s
+        </strong>
+       </article>
+      </div>
+      <p class="case-metric-note">
+       For comparison, the training set reached R&sup2; = 0.975, MAPE = 4.62%, MAE = 52.1 s, and RMSE = 98.4 s. The drop from training to validation is visible, but the validation performance remains strong.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Predicted vs. actual processing time
+      </h2>
+      <p>
+       The scatter plot below shows Random Forest predictions on the validation set against the observed processing times. The dashed diagonal represents perfect predictions: most points remain close to this reference line, while the dispersion becomes larger for some of the longest processing times.
+      </p>
+      <div class="case-visual-grid case-visual-grid--stacked">
+       <figure class="case-figure">
+        <img alt="Scatter plot comparing predicted and actual industrial processing times for a Random Forest model on the validation set." decoding="async" height="2043" loading="lazy" src="../images/processing-times/predicted-vs-actual-validation.png" width="2048"/>
+        <figcaption>
+         <strong>
+          Prediction quality on validation data.
+         </strong>
+         Points close to the diagonal indicate accurate estimates. The plot also makes the harder long-duration cases and larger residuals immediately visible.
+        </figcaption>
+       </figure>
+      </div>
+     </section>
+     <section>
+      <h2>
+       Model explainability with SHAP
+      </h2>
+      <p>
+       Accuracy alone was not enough for an industrial use case. I also used
+       <strong>
+        SHAP values
+       </strong>
+       to understand how individual input features push the predicted processing time upward or downward.
+      </p>
+      <div class="case-visual-grid case-visual-grid--stacked">
+       <figure class="case-figure">
+        <img alt="SHAP beeswarm summary showing the features that most influence the industrial processing-time prediction model." decoding="async" height="2048" loading="lazy" src="../images/processing-times/shap-summary.png" width="1706"/>
+        <figcaption>
+         <strong>
+          SHAP summary.
+         </strong>
+         The beeswarm makes both feature importance and direction of impact visible. In this experiment, the number of pieces and the number of holes are among the features with the largest effect on the prediction.
+        </figcaption>
+       </figure>
+      </div>
+     </section>
+     <section>
+      <h2>
+       What I worked on
+      </h2>
+      <ul class="case-list">
+       <li>
+        Regression modeling on industrial process data.
+       </li>
+       <li>
+        Feature engineering from structural and operational information.
+       </li>
+       <li>
+        Comparison of multiple model families, including tree-based and boosting approaches.
+       </li>
+       <li>
+        Evaluation using MAE, RMSE, R&sup2;, MAPE, residual behavior, and validation plots.
+       </li>
+       <li>
+        Model interpretation using SHAP.
+       </li>
+       <li>
+        API design with FastAPI, containerization with Docker, and deployment in a Linux environment.
+       </li>
+      </ul>
+      <div class="case-callout">
+       <p>
+        The key learning was that a useful ML project is not only about selecting an accurate model. It is about building the full path from operational data to a prediction that is measurable, explainable, and usable inside a real process.
+       </p>
+      </div>
+     </section>
+    </article>
+    <aside class="case-side">
+     <div class="case-side-inner">
+      <div class="case-side-card">
+       <span class="case-side-label">
+        Tech stack
+       </span>
+       <ul class="tags">
+        <li>
+         Python
+        </li>
+        <li>
+         scikit-learn
+        </li>
+        <li>
+         Random Forest
+        </li>
+        <li>
+         XGBoost
+        </li>
+        <li>
+         SHAP
+        </li>
+        <li>
+         FastAPI
+        </li>
+        <li>
+         Docker
+        </li>
+        <li>
+         Linux
+        </li>
+       </ul>
+      </div>
+      <div class="case-side-card">
+       <span class="case-side-label">
+        Project focus
+       </span>
+       <p>
+        Turning a regression problem into an explainable and deployable prediction service rather than stopping at an offline experiment.
+       </p>
+      </div>
+      <div class="case-side-card">
+       <span class="case-side-label">
+        Confidentiality note
+       </span>
+       <p>
+        The underlying industrial dataset, production records, source code, and internal deployment details are not published in this portfolio.
+       </p>
+      </div>
+     </div>
+    </aside>
+   </div>
+   <section class="case-next">
+    <div class="wrap case-next-grid">
+     <a href="./single-vs-parallel-random-walk.html">
+      <span>
+       PREVIOUS PROJECT
+      </span>
+      <strong>
+       &larr; Single vs Parallel Random Walks
+      </strong>
+     </a>
+     <a href="./yolo-technical-drawings.html">
+      <span>
+       NEXT PROJECT
+      </span>
+      <strong>
+       Object Detection in Industrial Technical Drawings &rarr;
+      </strong>
+     </a>
+    </div>
+   </section>
+   <footer id="contact" class="contact-footer">
+    <div class="wrap">
+     <p class="eyebrow">CONTACT</p>
+     <h2 class="contact-title">Get in Touch<span>.</span></h2>
+
+     <div class="contact-grid" aria-label="Contact links">
+      <a class="contact-card" href="https://www.linkedin.com/in/filippo-vicentini-9594b5220" target="_blank" rel="noreferrer" aria-label="Open Filippo Vicentini on LinkedIn">
+       <span class="contact-card-icon" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+         <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/>
+         <rect x="2" y="9" width="4" height="12"/>
+         <circle cx="4" cy="4" r="2"/>
+        </svg>
+       </span>
+       <strong>Filippo Vicentini</strong>
+       <span class="contact-card-label">LINKEDIN</span>
+      </a>
+
+      <a class="contact-card" href="mailto:pippovice@gmail.com" aria-label="Send an email to pippovice@gmail.com">
+       <span class="contact-card-icon" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+         <rect x="3" y="5" width="18" height="14" rx="2"/>
+         <path d="m3 7 9 6 9-6"/>
+        </svg>
+       </span>
+       <strong>pippovice@gmail.com</strong>
+       <span class="contact-card-label">EMAIL</span>
+      </a>
+
+      <a class="contact-card" href="https://github.com/filippovicentini" target="_blank" rel="noreferrer" aria-label="Open filippovicentini on GitHub">
+       <span class="contact-card-icon" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+         <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3.3-.4 6.8-1.6 6.8-7A5.4 5.4 0 0 0 19.4 4 5 5 0 0 0 19.3.5S18.2.1 15 1.8a13.4 13.4 0 0 0-7 0C4.8.1 3.7.5 3.7.5A5 5 0 0 0 3.6 4a5.4 5.4 0 0 0-1.4 3.7c0 5.4 3.5 6.6 6.8 7A4.8 4.8 0 0 0 8 18v4"/>
+         <path d="M8 19c-3 .9-3-1.5-4-2"/>
+        </svg>
+       </span>
+       <strong>filippovicentini</strong>
+       <span class="contact-card-label">GITHUB</span>
+      </a>
+     </div>
+
+     <div class="footer-bottom footer-bottom--minimal">
+      <span>&copy; 2026 Filippo Vicentini. All rights reserved.</span>
+     </div>
+    </div>
+   </footer>
+  </main>
+ </body>
+</html>

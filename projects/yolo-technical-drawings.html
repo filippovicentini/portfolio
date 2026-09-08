@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <meta content="#0b1119" name="theme-color"/>
+  <meta content="A work project using YOLO-based computer vision to detect holes, slots, and inclined cuts in industrial technical drawings." name="description"/>
+  <title>
+   Object Detection in Industrial Technical Drawings | Filippo Vicentini
+  </title>
+  <link href="../favicon.svg" rel="icon" type="image/svg+xml"/>
+  <link href="../styles.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <a class="skip" href="#main">
+   Skip to content
+  </a>
+  <header class="case-header wrap">
+   <a aria-label="Back to portfolio" class="brand" href="../index.html">
+    fv
+    <span>
+     .
+    </span>
+   </a>
+   <div class="case-header-actions">
+    <a aria-label="Back to all projects" class="case-back" href="../index.html#progetti">
+     <svg aria-hidden="true" fill="none" height="17" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="17">
+      <path d="M19 12H5">
+      </path>
+      <path d="m12 19-7-7 7-7">
+      </path>
+     </svg>
+     <span>
+      All projects
+     </span>
+    </a>
+   </div>
+  </header>
+  <main id="main">
+   <section class="case-hero">
+    <div class="wrap case-hero-inner">
+     <span class="case-kicker">
+      02 / COMPUTER VISION / INDUSTRY
+     </span>
+     <h1>
+      Object Detection in Industrial Technical Drawings
+     </h1>
+     <p class="case-lead">
+      A YOLO-based computer vision project for turning technical drawings into machine-readable production information by detecting holes, slots, and inclined cuts.
+     </p>
+     <div class="case-meta">
+      <article>
+       <span>
+        Context
+       </span>
+       <strong>
+        Manni Sipre &middot; Work project
+       </strong>
+      </article>
+      <article>
+       <span>
+        My role
+       </span>
+       <strong>
+        Computer vision &middot; Object detection &middot; Industrial problem framing &middot; GPU Training
+       </strong>
+      </article>
+      <article>
+       <span>
+        Output
+       </span>
+       <strong>
+        Automatic extraction of geometric features from technical drawings
+       </strong>
+      </article>
+     </div>
+    </div>
+   </section>
+   <div class="wrap case-content">
+    <article class="case-main">
+     <section>
+      <h2>
+       Overview
+      </h2>
+      <p>
+       Industrial technical drawings contain a large amount of production-relevant information, but extracting that information manually is repetitive, time-consuming, and difficult to scale. In this project, I used a
+       <strong>
+        YOLO-based object detection workflow
+       </strong>
+       to automatically identify key geometric elements directly from drawings.
+      </p>
+      <p>
+       The goal was to detect
+       <strong>
+        holes
+       </strong>
+       and
+       <strong>
+        slots
+       </strong>, and also support the interpretation of an
+       <strong>
+        inclined cut
+       </strong>
+       configuration. The final objective was not just model accuracy, but producing structured information that could be useful in downstream industrial workflows.
+      </p>
+      <p>
+       The YOLO training process was carried out on an
+       <strong>
+        NVIDIA GeForce RTX 5070 Ti GPU
+       </strong>, providing the compute required for iterative model training and evaluation.
+      </p>
+     </section>
+     <section>
+      <h2>
+       The problem
+      </h2>
+      <p>
+       Technical drawings are rich in symbolic and geometric information, but the same richness also makes them difficult to process automatically. In a production setting, operators often need to inspect drawings repeatedly to identify specific features that affect cutting, drilling, and subsequent manufacturing decisions.
+      </p>
+      <p>
+       I framed this challenge as a computer vision problem: instead of reading the drawing manually, the model learns to recognize visual patterns corresponding to relevant manufacturing features.
+      </p>
+     </section>
+     <section>
+      <h2>
+       What the model detects
+      </h2>
+      <ul class="case-list">
+       <li>
+        <strong>
+         Holes
+        </strong>
+        in the drawing, localized through object detection bounding boxes.
+       </li>
+       <li>
+        <strong>
+         Slots
+        </strong>
+        (asole), also detected directly from the technical representation.
+       </li>
+       <li>
+        <strong>
+         Inclined cuts
+        </strong>, interpreted from the visual geometry of the drawing.
+       </li>
+       <li>
+        Feature positions that can be translated into structured information for downstream use.
+       </li>
+      </ul>
+     </section>
+     <section>
+      <h2>
+       Detection examples
+      </h2>
+      <p>
+       The examples below show anonymized drawing excerpts used to illustrate how the model identifies relevant geometric elements. Any confidential metadata, title blocks, client references, or internal codes have been intentionally removed or obscured.
+      </p>
+      <div class="case-visual-grid case-visual-grid--two">
+       <figure class="case-figure">
+        <img alt="Anonymized industrial technical drawing with YOLO detections highlighting holes in red and slots in green." decoding="async" height="1086" loading="lazy" src="../images/yolo/yolo-holes-slots-anonymized.png" width="1448"/>
+        <figcaption>
+         <strong>
+          Detection of holes and slots.
+         </strong>
+         The model detects recurrent geometric features directly on the drawing, highlighting holes in red and slots in green.
+        </figcaption>
+       </figure>
+       <figure class="case-figure">
+        <img alt="Anonymized industrial technical drawing with YOLO detection highlighting an inclined cut area in blue." decoding="async" height="1086" loading="lazy" src="../images/yolo/yolo-inclined-cut-anonymized.png" width="1448"/>
+        <figcaption>
+         <strong>
+          Inclined cut interpretation.
+         </strong>
+         Beyond simple localization, the workflow also supports the recognition of the inclined cut region represented in the drawing.
+        </figcaption>
+       </figure>
+      </div>
+     </section>
+     <section>
+      <h2>
+       Training and evaluation
+      </h2>
+      <p>
+       I evaluated the model both qualitatively, through detection examples on drawings, and quantitatively, through training metrics and a normalized confusion matrix. This helped verify that the detector was learning the right classes while maintaining strong precision and recall. In particular, the training process was performed on a
+       <strong>
+        NVIDIA GeForce RTX 5070 Ti
+       </strong>.
+      </p>
+      <div class="case-visual-grid case-visual-grid--stacked">
+       <figure class="case-figure">
+        <img alt="Normalized confusion matrix for YOLO classification with classes foro, asola, and background." decoding="async" height="1536" loading="lazy" src="../images/yolo/yolo-confusion-matrix.png" width="2048"/>
+        <figcaption>
+         <strong>
+          Normalized confusion matrix.
+         </strong>
+         The class-level results show strong separation between
+         <em>
+          foro
+         </em>,
+         <em>
+          asola
+         </em>, and background, with only limited confusion.
+        </figcaption>
+       </figure>
+       <figure class="case-figure">
+        <img alt="YOLO training metrics including losses, precision, recall, mAP50 and mAP50-95 over training epochs." decoding="async" height="1024" loading="lazy" src="../images/yolo/yolo-training-metrics.png" width="2048"/>
+        <figcaption>
+         <strong>
+          Training dynamics and validation performance.
+         </strong>
+         The learning curves indicate stable convergence and strong end-of-training precision, recall, and detection quality.
+        </figcaption>
+       </figure>
+      </div>
+     </section>
+     <section>
+      <h2>
+       Impact on the workflow
+      </h2>
+      <div class="case-numbered">
+       <article class="case-step">
+        <h3>
+         Reduced manual interpretation
+        </h3>
+        <p>
+         Instead of visually checking each drawing element by hand, the detector provides an automatic first pass over the features that matter most.
+        </p>
+       </article>
+       <article class="case-step">
+        <h3>
+         Structured geometric extraction
+        </h3>
+        <p>
+         The output can be converted into structured information, making technical drawings easier to integrate into downstream digital workflows.
+        </p>
+       </article>
+       <article class="case-step">
+        <h3>
+         Industrial relevance over pure accuracy
+        </h3>
+        <p>
+         The project focused on practical usefulness: identifying the information that helps real production decisions rather than optimizing for a benchmark in isolation.
+        </p>
+       </article>
+      </div>
+      <div class="case-callout">
+       <p>
+        This project was especially valuable because it showed how computer vision can bridge the gap between visual technical documents and production-oriented decision making.
+       </p>
+      </div>
+     </section>
+    </article>
+    <aside class="case-side">
+     <div class="case-side-inner">
+      <div class="case-side-card">
+       <span class="case-side-label">
+        Tech stack
+       </span>
+       <ul class="tags">
+        <li>
+         Python
+        </li>
+        <li>
+         YOLO
+        </li>
+        <li>
+         Computer Vision
+        </li>
+        <li>
+         Object Detection
+        </li>
+        <li>
+         Model Evaluation
+        </li>
+       </ul>
+      </div>
+      <div class="case-side-card">
+       <span class="case-side-label">
+        Project focus
+       </span>
+       <p>
+        Using computer vision to extract geometric information from technical drawings and reduce repetitive manual interpretation in an industrial context.
+       </p>
+      </div>
+      <div class="case-side-card">
+       <span class="case-side-label">
+        Confidentiality note
+       </span>
+       <p>
+        Because this was developed in a company environment, the examples shown here are intentionally anonymized. Proprietary code, raw datasets, customer references, and internal implementation details are not published.
+       </p>
+      </div>
+     </div>
+    </aside>
+   </div>
+   <section class="case-next">
+    <div class="wrap case-next-grid">
+     <a href="./industrial-processing-times.html">
+      <span>
+       PREVIOUS PROJECT
+      </span>
+      <strong>
+       &larr; Predicting Industrial Processing Times
+      </strong>
+     </a>
+     <a href="./rain-prediction.html">
+      <span>
+       NEXT PROJECT
+      </span>
+      <strong>
+       Machine Learning for Rain Prediction &rarr;
+      </strong>
+     </a>
+    </div>
+   </section>
+   <footer id="contact" class="contact-footer">
+    <div class="wrap">
+     <p class="eyebrow">CONTACT</p>
+     <h2 class="contact-title">Get in Touch<span>.</span></h2>
+
+     <div class="contact-grid" aria-label="Contact links">
+      <a class="contact-card" href="https://www.linkedin.com/in/filippo-vicentini-9594b5220" target="_blank" rel="noreferrer" aria-label="Open Filippo Vicentini on LinkedIn">
+       <span class="contact-card-icon" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+         <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/>
+         <rect x="2" y="9" width="4" height="12"/>
+         <circle cx="4" cy="4" r="2"/>
+        </svg>
+       </span>
+       <strong>Filippo Vicentini</strong>
+       <span class="contact-card-label">LINKEDIN</span>
+      </a>
+
+      <a class="contact-card" href="mailto:pippovice@gmail.com" aria-label="Send an email to pippovice@gmail.com">
+       <span class="contact-card-icon" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+         <rect x="3" y="5" width="18" height="14" rx="2"/>
+         <path d="m3 7 9 6 9-6"/>
+        </svg>
+       </span>
+       <strong>pippovice@gmail.com</strong>
+       <span class="contact-card-label">EMAIL</span>
+      </a>
+
+      <a class="contact-card" href="https://github.com/filippovicentini" target="_blank" rel="noreferrer" aria-label="Open filippovicentini on GitHub">
+       <span class="contact-card-icon" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+         <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3.3-.4 6.8-1.6 6.8-7A5.4 5.4 0 0 0 19.4 4 5 5 0 0 0 19.3.5S18.2.1 15 1.8a13.4 13.4 0 0 0-7 0C4.8.1 3.7.5 3.7.5A5 5 0 0 0 3.6 4a5.4 5.4 0 0 0-1.4 3.7c0 5.4 3.5 6.6 6.8 7A4.8 4.8 0 0 0 8 18v4"/>
+         <path d="M8 19c-3 .9-3-1.5-4-2"/>
+        </svg>
+       </span>
+       <strong>filippovicentini</strong>
+       <span class="contact-card-label">GITHUB</span>
+      </a>
+     </div>
+
+     <div class="footer-bottom footer-bottom--minimal">
+      <span>&copy; 2026 Filippo Vicentini. All rights reserved.</span>
+     </div>
+    </div>
+   </footer>
+  </main>
+ </body>
+</html>

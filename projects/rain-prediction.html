@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <meta content="#0b1119" name="theme-color"/>
+  <meta content="A machine-learning project for next-day rain prediction, comparing neural networks, boosting models, and sampling strategies on an imbalanced weather dataset." name="description"/>
+  <title>
+   Machine Learning for Rain Prediction | Filippo Vicentini
+  </title>
+  <link href="../favicon.svg" rel="icon" type="image/svg+xml"/>
+  <link href="../styles.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <a class="skip" href="#main">
+   Skip to content
+  </a>
+  <header class="case-header wrap">
+   <a aria-label="Back to portfolio" class="brand" href="../index.html">
+    fv
+    <span>
+     .
+    </span>
+   </a>
+   <div class="case-header-actions">
+    <a aria-label="Back to all projects" class="case-back" href="../index.html#progetti">
+     <svg aria-hidden="true" fill="none" height="17" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="17">
+      <path d="M19 12H5">
+      </path>
+      <path d="m12 19-7-7 7-7">
+      </path>
+     </svg>
+     <span>
+      All projects
+     </span>
+    </a>
+    <a aria-label="Open GitHub repository" class="case-external" href="https://github.com/filippovicentini/machine_learning_UNIVR" rel="noreferrer" target="_blank">
+     <span>
+      GitHub
+     </span>
+     <svg aria-hidden="true" fill="none" height="17" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="17">
+      <path d="M7 17 17 7">
+      </path>
+      <path d="M7 7h10v10">
+      </path>
+     </svg>
+    </a>
+   </div>
+  </header>
+  <main id="main">
+   <section class="case-hero">
+    <div class="wrap case-hero-inner">
+     <span class="case-kicker">
+      03 / CLASSIFICATION / WEATHER
+     </span>
+     <h1>
+      Machine Learning for Rain Prediction
+     </h1>
+     <p class="case-lead">
+      A classification project for predicting next-day rain, with a focus on model comparison, imbalanced data, resampling strategies, and the precision&ndash;recall trade-off.
+     </p>
+     <div class="case-meta">
+      <article>
+       <span>
+        Context
+       </span>
+       <strong>
+        Machine Learning course &middot; University of Verona
+       </strong>
+      </article>
+      <article>
+       <span>
+        My role
+       </span>
+       <strong>
+        EDA &middot; Preprocessing &middot; Classification &middot; Model comparison
+       </strong>
+      </article>
+      <article>
+       <span>
+        Output
+       </span>
+       <strong>
+        Comparative evaluation of models and sampling strategies
+       </strong>
+      </article>
+     </div>
+    </div>
+   </section>
+   <div class="wrap case-content">
+    <article class="case-main">
+     <section>
+      <h2>
+       Overview
+      </h2>
+      <p>
+       The goal of the project was to predict whether it would
+       <strong>
+        rain the following day
+       </strong>
+       from historical weather observations in the public
+       <code>
+        weatherAUS
+       </code>
+       dataset. Because rainy days represent the minority class, the project was not simply about maximizing accuracy: the evaluation had to account for the trade-off between correctly identifying rain and avoiding unnecessary false alarms.
+      </p>
+      <p>
+       I compared different model families and sampling strategies, including the original class distribution,
+       <strong>
+        SMOTE
+       </strong>, and
+       <strong>
+        under-sampling
+       </strong>, and evaluated the full pipelines using metrics better suited to imbalanced classification.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Approach
+      </h2>
+      <div class="case-numbered">
+       <article class="case-step">
+        <h3>
+         Prepare the weather data
+        </h3>
+        <p>
+         Explore the dataset, clean and preprocess the variables, and create a consistent training pipeline for comparing multiple classifiers.
+        </p>
+       </article>
+       <article class="case-step">
+        <h3>
+         Handle class imbalance explicitly
+        </h3>
+        <p>
+         Compare the original data distribution with SMOTE and under-sampling to understand how each strategy changes the model's behavior on the minority rain class.
+        </p>
+       </article>
+       <article class="case-step">
+        <h3>
+         Compare model families
+        </h3>
+        <p>
+         Evaluate neural-network and boosting-based approaches rather than assuming that one algorithm or one sampling strategy would dominate across every metric.
+        </p>
+       </article>
+       <article class="case-step">
+        <h3>
+         Evaluate beyond accuracy
+        </h3>
+        <p>
+         Use precision, recall, F1-score, ROC AUC, and PR AUC to judge the quality of the classifier from different perspectives.
+        </p>
+       </article>
+      </div>
+     </section>
+     <section>
+      <h2>
+       Best overall results
+      </h2>
+      <p>
+       The
+       <strong>
+        Neural Network without resampling
+       </strong>
+       achieved the strongest overall performance across most of the comparison metrics.
+      </p>
+      <div class="case-metrics">
+       <article class="case-metric">
+        <span>
+         Accuracy
+        </span>
+        <strong>
+         0.912
+        </strong>
+       </article>
+       <article class="case-metric">
+        <span>
+         F1-score
+        </span>
+        <strong>
+         0.789
+        </strong>
+       </article>
+       <article class="case-metric">
+        <span>
+         PR AUC
+        </span>
+        <strong>
+         0.888
+        </strong>
+       </article>
+       <article class="case-metric">
+        <span>
+         ROC AUC
+        </span>
+        <strong>
+         0.957
+        </strong>
+       </article>
+      </div>
+      <p class="case-metric-note">
+       The same configuration also reached precision = 0.839. The highest recall, 0.873, was instead obtained by XGBoost with under-sampling.
+      </p>
+      <figure class="case-figure case-figure--compact">
+       <img alt="Table summarizing the best rain prediction metrics and the model or sampling method achieving each value." decoding="async" height="328" loading="lazy" src="../images/rain/rain-best-metrics.png" width="462"/>
+       <figcaption>
+        <strong>
+         Best metric by configuration.
+        </strong>
+        The neural network without resampling leads most overall metrics, while XGBoost with under-sampling reaches the highest recall.
+       </figcaption>
+      </figure>
+     </section>
+     <section>
+      <h2>
+       Model evaluation
+      </h2>
+      <p>
+       The diagnostic plots provide a more complete picture than a single score. The ROC curve shows strong discrimination between the two classes, while the precision&ndash;recall curve is particularly useful because the positive rain class is imbalanced. The confusion matrix makes the trade-off between false positives and false negatives directly visible.
+      </p>
+      <div class="case-visual-grid case-visual-grid--stacked">
+       <figure class="case-figure">
+        <img alt="Rain prediction evaluation panel with ROC curve, precision-recall curve, confusion matrix, and residual distribution." decoding="async" height="636" loading="lazy" src="../images/rain/rain-evaluation-panel.png" width="1216"/>
+        <figcaption>
+         <strong>
+          Classification diagnostics.
+         </strong>
+         ROC and precision&ndash;recall curves, confusion matrix, and error distribution provide complementary views of model performance rather than relying on accuracy alone.
+        </figcaption>
+       </figure>
+      </div>
+     </section>
+     <section>
+      <h2>
+       What resampling changes
+      </h2>
+      <p>
+       The sampling experiment shows why class balancing is not automatically an improvement. Under-sampling increases recall substantially, which is useful when missing a rainy day is especially costly, but it also reduces precision and overall accuracy. SMOTE sits between the original distribution and under-sampling on several metrics.
+      </p>
+      <div class="case-visual-grid case-visual-grid--stacked">
+       <figure class="case-figure">
+        <img alt="Bar chart comparing accuracy, recall, precision, F1-score, and PR AUC for original data, SMOTE, and under-sampling." decoding="async" height="700" loading="lazy" src="../images/rain/rain-sampling-comparison.png" width="1216"/>
+        <figcaption>
+         <strong>
+          Sampling-strategy comparison.
+         </strong>
+         Rebalancing improves sensitivity to the minority class, but the gain in recall comes with a measurable cost in precision and overall performance.
+        </figcaption>
+       </figure>
+      </div>
+     </section>
+     <section>
+      <h2>
+       Final conclusion
+      </h2>
+      <p>
+       The experiments show that there is
+       <strong>
+        no universally best sampling strategy
+       </strong>: the right choice depends on what type of error matters most. In this project, the
+       <strong>
+        Neural Network trained on the original, non-resampled dataset
+       </strong>
+       produced the best overall balance, achieving the top accuracy, F1-score, precision, PR AUC, and ROC AUC among the tested configurations.
+      </p>
+      <p>
+       However,
+       <strong>
+        XGBoost with under-sampling
+       </strong>
+       achieved the highest recall. This makes it a meaningful alternative when the priority is to identify as many rainy days as possible, even at the cost of more false positives.
+      </p>
+      <div class="case-callout">
+       <p>
+        The main takeaway is that handling imbalance is not simply about forcing the classes to be balanced. Resampling changes the classifier's decision trade-off, so model selection should be driven by the metric that best represents the real objective of the prediction problem.
+       </p>
+      </div>
+     </section>
+    </article>
+    <aside class="case-side">
+     <div class="case-side-inner">
+      <div class="case-side-card">
+       <span class="case-side-label">
+        Tech stack
+       </span>
+       <ul class="tags">
+        <li>
+         Python
+        </li>
+        <li>
+         Scikit-learn
+        </li>
+        <li>
+         XGBoost
+        </li>
+        <li>
+         Neural Networks
+        </li>
+        <li>
+         SMOTE
+        </li>
+       </ul>
+      </div>
+      <div class="case-side-card">
+       <span class="case-side-label">
+        Best overall setup
+       </span>
+       <p>
+        Neural Network without resampling: strongest overall balance across accuracy, precision, F1-score, PR AUC, and ROC AUC.
+       </p>
+      </div>
+      <div class="case-side-card">
+       <span class="case-side-label">
+        Best recall
+       </span>
+       <p>
+        XGBoost with under-sampling reached recall = 0.873, highlighting the trade-off between detecting more rainy days and maintaining precision.
+       </p>
+      </div>
+      <div class="case-side-card">
+       <span class="case-side-label">
+        Repository
+       </span>
+       <p>
+        The full university project, including the notebook and dataset workflow, is available on GitHub.
+       </p>
+       <a href="https://github.com/filippovicentini/machine_learning_UNIVR" rel="noreferrer" target="_blank">
+        Open repository
+        <svg aria-hidden="true" fill="none" height="17" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="17">
+         <path d="M7 17 17 7">
+         </path>
+         <path d="M7 7h10v10">
+         </path>
+        </svg>
+       </a>
+      </div>
+     </div>
+    </aside>
+   </div>
+   <section class="case-next">
+    <div class="wrap case-next-grid">
+     <a href="./yolo-technical-drawings.html">
+      <span>
+       PREVIOUS PROJECT
+      </span>
+      <strong>
+       &larr; Object Detection in Industrial Technical Drawings
+      </strong>
+     </a>
+     <a href="./amazon-sales.html">
+      <span>
+       NEXT PROJECT
+      </span>
+      <strong>
+       Amazon Sales Analysis &rarr;
+      </strong>
+     </a>
+    </div>
+   </section>
+   <footer id="contact" class="contact-footer">
+    <div class="wrap">
+     <p class="eyebrow">CONTACT</p>
+     <h2 class="contact-title">Get in Touch<span>.</span></h2>
+
+     <div class="contact-grid" aria-label="Contact links">
+      <a class="contact-card" href="https://www.linkedin.com/in/filippo-vicentini-9594b5220" target="_blank" rel="noreferrer" aria-label="Open Filippo Vicentini on LinkedIn">
+       <span class="contact-card-icon" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+         <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/>
+         <rect x="2" y="9" width="4" height="12"/>
+         <circle cx="4" cy="4" r="2"/>
+        </svg>
+       </span>
+       <strong>Filippo Vicentini</strong>
+       <span class="contact-card-label">LINKEDIN</span>
+      </a>
+
+      <a class="contact-card" href="mailto:pippovice@gmail.com" aria-label="Send an email to pippovice@gmail.com">
+       <span class="contact-card-icon" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+         <rect x="3" y="5" width="18" height="14" rx="2"/>
+         <path d="m3 7 9 6 9-6"/>
+        </svg>
+       </span>
+       <strong>pippovice@gmail.com</strong>
+       <span class="contact-card-label">EMAIL</span>
+      </a>
+
+      <a class="contact-card" href="https://github.com/filippovicentini" target="_blank" rel="noreferrer" aria-label="Open filippovicentini on GitHub">
+       <span class="contact-card-icon" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+         <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3.3-.4 6.8-1.6 6.8-7A5.4 5.4 0 0 0 19.4 4 5 5 0 0 0 19.3.5S18.2.1 15 1.8a13.4 13.4 0 0 0-7 0C4.8.1 3.7.5 3.7.5A5 5 0 0 0 3.6 4a5.4 5.4 0 0 0-1.4 3.7c0 5.4 3.5 6.6 6.8 7A4.8 4.8 0 0 0 8 18v4"/>
+         <path d="M8 19c-3 .9-3-1.5-4-2"/>
+        </svg>
+       </span>
+       <strong>filippovicentini</strong>
+       <span class="contact-card-label">GITHUB</span>
+      </a>
+     </div>
+
+     <div class="footer-bottom footer-bottom--minimal">
+      <span>&copy; 2026 Filippo Vicentini. All rights reserved.</span>
+     </div>
+    </div>
+   </footer>
+  </main>
+ </body>
+</html>

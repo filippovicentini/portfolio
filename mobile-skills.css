@@ -1,0 +1,236 @@
+/* Mobile Skills Bento v8 — isolated mobile-only stylesheet.
+   Loaded after styles.css to avoid stale-cache/cascade conflicts. */
+
+@media (max-width: 720px) {
+  #competenze .mobile-skills-bento {
+    display: block !important;
+    width: 100%;
+    margin-top: 18px;
+    box-sizing: border-box;
+  }
+
+  /* Hide legacy/mobile experiments and desktop skills on phones. */
+  #competenze .mobile-skills-grid,
+  #competenze .mobile-skill-ladder,
+  #competenze .mobile-skills-rail,
+  #competenze .mobile-capability-rail,
+  #competenze .mobile-skill-toggle-input,
+  #competenze > .skills-foundation,
+  #competenze > .skills-grid {
+    display: none !important;
+  }
+
+  #competenze .mobile-skills-bento-intro {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+    margin: 0 0 12px;
+    padding: 0 0 10px;
+    border-bottom: 1px solid rgba(177, 193, 218, 0.12);
+    box-sizing: border-box;
+  }
+
+  #competenze .mobile-skills-bento-intro > span {
+    color: #9daaff;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    font-size: 10px !important;
+    font-weight: 800;
+    letter-spacing: 1.25px;
+    line-height: 1;
+  }
+
+  #competenze .mobile-skills-bento-intro > p {
+    margin: 0 !important;
+    color: #7d8ba0;
+    font-size: 11px !important;
+    line-height: 1.3;
+    text-align: right;
+  }
+
+  #competenze .mobile-skills-bento-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+    width: 100%;
+  }
+
+  #competenze .mobile-bento-card {
+    position: relative;
+    display: block !important;
+    min-width: 0;
+    min-height: 142px;
+    margin: 0 !important;
+    padding: 14px !important;
+    overflow: hidden;
+    border: 1px solid rgba(177, 193, 218, 0.14) !important;
+    border-radius: 16px !important;
+    background:
+      radial-gradient(circle at 100% 0%, rgba(128, 148, 255, 0.11), transparent 46%),
+      linear-gradient(145deg, rgba(29, 41, 61, 0.78), rgba(12, 20, 31, 0.94)) !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.025);
+    box-sizing: border-box;
+  }
+
+  #competenze .mobile-bento-card::after {
+    position: absolute;
+    right: -30px;
+    bottom: -40px;
+    width: 88px;
+    height: 88px;
+    content: "";
+    border: 1px solid rgba(145, 163, 255, 0.07);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  #competenze .mobile-bento-meta {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin: 0 0 13px !important;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  }
+
+  #competenze .mobile-bento-meta > span {
+    color: #718097;
+    font-size: 9px !important;
+    font-weight: 760;
+    letter-spacing: .8px;
+  }
+
+  #competenze .mobile-bento-meta > i {
+    display: inline-flex;
+    align-items: center;
+    min-height: 20px;
+    padding: 3px 6px;
+    border: 1px solid rgba(154, 169, 255, 0.14);
+    border-radius: 999px;
+    color: #a4afff;
+    font-size: 8px !important;
+    font-style: normal;
+    font-weight: 800;
+    letter-spacing: .65px;
+    line-height: 1;
+  }
+
+  #competenze .mobile-bento-card h3 {
+    margin: 0 0 7px !important;
+    color: #eef3fb;
+    font-size: 17px !important;
+    font-weight: 720;
+    line-height: 1.08 !important;
+    letter-spacing: -.45px;
+  }
+
+  #competenze .mobile-bento-card > p,
+  #competenze .mobile-bento-wide-copy p {
+    margin: 0 0 11px !important;
+    color: #8391a5;
+    font-size: 10px !important;
+    line-height: 1.35 !important;
+  }
+
+  #competenze .mobile-bento-tools {
+    display: flex !important;
+    flex-wrap: wrap;
+    gap: 5px !important;
+    margin: 0 !important;
+  }
+
+  #competenze .mobile-bento-tools > span {
+    display: inline-flex !important;
+    align-items: center;
+    padding: 4px 6px !important;
+    border: 1px solid rgba(177, 193, 218, 0.11);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.022);
+    color: #aeb9c8;
+    font-size: 8px !important;
+    line-height: 1 !important;
+    white-space: nowrap;
+  }
+
+  #competenze .mobile-bento-proof {
+    position: absolute;
+    right: 13px;
+    bottom: 11px;
+    left: 13px;
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(177, 193, 218, 0.09);
+    color: #bcc6d5;
+    font-size: 9px !important;
+    font-weight: 650;
+    line-height: 1.2;
+    text-decoration: none;
+  }
+
+  #competenze .mobile-bento-proof > span {
+    color: #aab5ff;
+    font-size: 12px !important;
+  }
+
+  #competenze .mobile-bento-card-ml,
+  #competenze .mobile-bento-card-cv {
+    min-height: 178px;
+    padding-bottom: 46px !important;
+  }
+
+
+  #competenze .mobile-bento-card-dl {
+    background:
+      radial-gradient(circle at 100% 0%, rgba(135, 115, 255, 0.12), transparent 46%),
+      linear-gradient(145deg, rgba(29, 41, 61, 0.78), rgba(12, 20, 31, 0.94)) !important;
+  }
+
+  #competenze .mobile-bento-card-data {
+    background:
+      radial-gradient(circle at 100% 0%, rgba(92, 176, 255, 0.10), transparent 46%),
+      linear-gradient(145deg, rgba(29, 41, 61, 0.78), rgba(12, 20, 31, 0.94)) !important;
+  }
+
+  #competenze .mobile-skills-bento-foundation {
+    display: flex !important;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 8px;
+    margin-top: 13px;
+    padding: 12px 1px 0;
+    border-top: 1px solid rgba(177, 193, 218, 0.11);
+  }
+
+  #competenze .mobile-skills-bento-foundation > span {
+    width: 100%;
+    color: #6f7d91;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    font-size: 8px !important;
+    font-weight: 800;
+    letter-spacing: 1px;
+  }
+
+  #competenze .mobile-skills-bento-foundation > strong {
+    color: #b7c2d1;
+    font-size: 10px !important;
+    font-weight: 630;
+  }
+
+  #competenze .mobile-skills-bento-foundation > i {
+    color: rgba(143, 161, 255, .45);
+    font-size: 9px !important;
+    font-style: normal;
+  }
+}
+
+@media (max-width: 390px) {
+  #competenze .mobile-skills-bento-grid { gap: 8px !important; }
+  #competenze .mobile-bento-card { min-height: 136px; padding: 12px !important; }
+  #competenze .mobile-bento-card-ml,
+  #competenze .mobile-bento-card-cv { min-height: 172px; padding-bottom: 44px !important; }
+  #competenze .mobile-bento-card h3 { font-size: 15.5px !important; }
+}

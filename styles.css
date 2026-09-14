@@ -3708,41 +3708,3273 @@ body.command-open {
 }
 
 /* =========================================================
-   Final mobile sticky navigation fix
-   Keep both the home navigation and project header sticky in
-   portrait mode. This block intentionally lives at the end of
-   the stylesheet so it overrides earlier mobile media rules.
+   Mobile UX v2
+   A deliberately lighter, mobile-first presentation layer.
+   Desktop styles above remain unchanged.
    ========================================================= */
 @media (max-width: 720px) {
-  /* Avoid creating a horizontal scroll container that can
-     interfere with sticky positioning in mobile Safari. */
-  html,
-  body {
+  :root {
+    --mobile-gutter: 18px;
+    --mobile-card-radius: 14px;
+  }
+
+  html {
+    scroll-padding-top: 82px;
     overflow-x: clip;
   }
 
-  .header,
+  body {
+    overflow-x: clip;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .wrap {
+    width: calc(100% - (var(--mobile-gutter) * 2));
+  }
+
+  /* Compact app-like top bar. Section navigation lives in the command palette. */
+  .header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 900;
+    width: 100%;
+    height: 64px;
+    min-height: 64px;
+    margin: 0;
+    padding: 0 var(--mobile-gutter);
+    flex-wrap: nowrap;
+    gap: 14px;
+    border-bottom: 1px solid rgba(177, 193, 218, 0.14);
+    background: rgba(11, 17, 25, 0.92);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.14);
+    backdrop-filter: blur(18px) saturate(130%);
+    -webkit-backdrop-filter: blur(18px) saturate(130%);
+  }
+
+  .header::before {
+    display: none;
+  }
+
+  .header + main {
+    padding-top: 64px;
+  }
+
+  .header nav {
+    display: none;
+  }
+
+  .brand {
+    font-size: 28px;
+    letter-spacing: -2.4px;
+  }
+
+  .nav-contact {
+    min-height: 36px;
+    margin-left: auto;
+    padding: 0 11px;
+    gap: 7px;
+    border-radius: 10px;
+    font-size: 11px;
+  }
+
+  .nav-contact svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  /* Hero: first screen communicates identity, role and actions without crowding. */
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding-block: 42px 52px;
+  }
+
+  .hero::after {
+    top: 42%;
+    right: -68%;
+    width: 360px;
+    height: 360px;
+    opacity: 0.72;
+  }
+
+  .hero .eyebrow {
+    margin-bottom: 16px;
+  }
+
+  .eyebrow {
+    gap: 8px;
+    font-size: 9px;
+    letter-spacing: 0.75px;
+  }
+
+  .dot {
+    width: 6px;
+    height: 6px;
+  }
+
+  h1 {
+    margin-bottom: 22px;
+    font-size: clamp(50px, 15.5vw, 64px);
+    line-height: 0.93;
+    letter-spacing: -3.6px;
+  }
+
+  .statement {
+    margin-bottom: 13px;
+    font-size: 20px;
+    line-height: 1.28;
+    letter-spacing: -0.55px;
+  }
+
+  .intro {
+    margin: 15px 0 21px;
+    font-size: 14px;
+    line-height: 1.65;
+  }
+
+  .hero-credentials {
+    gap: 7px;
+    margin: 0 0 22px;
+    font-size: 8.5px;
+    letter-spacing: 0.25px;
+  }
+
+  .hero-credentials span {
+    padding: 6px 8px;
+    border: 1px solid rgba(177, 193, 218, 0.13);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.026);
+  }
+
+  .hero-credentials i {
+    display: none;
+  }
+
+  .actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 9px;
+  }
+
+  .primary,
+  .secondary {
+    min-width: 0;
+    min-height: 43px;
+    padding-inline: 12px;
+    border-radius: 10px;
+    font-size: 11.5px;
+  }
+
+  .hero aside {
+    width: 100%;
+    max-width: none;
+  }
+
+  .portrait {
+    border-radius: 18px;
+  }
+
+  .portrait img {
+    height: min(76vw, 310px);
+    object-position: center 23%;
+  }
+
+  .photo-label {
+    bottom: 12px;
+    left: 12px;
+    padding: 6px 8px;
+    border-radius: 7px;
+    font-size: 8px;
+    letter-spacing: 0.8px;
+  }
+
+  .caption {
+    padding: 11px 2px 0;
+  }
+
+  .caption strong {
+    font-size: 12px;
+  }
+
+  .caption span {
+    margin-top: 3px;
+    font-size: 10.5px;
+  }
+
+  .caption b {
+    display: none;
+  }
+
+  /* Keep the marquee as a signature, but make it a single compact band. */
+  .build-marquee-inner {
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 14px;
+    min-height: 56px;
+    padding-block: 0;
+  }
+
+  .build-marquee-label {
+    padding-left: 0;
+    font-size: 8px;
+    letter-spacing: 1px;
+  }
+
+  .build-marquee-window {
+    margin-inline: 0;
+  }
+
+  .build-marquee-track {
+    animation-duration: 42s;
+  }
+
+  .build-marquee-set {
+    gap: 18px;
+    padding-right: 18px;
+  }
+
+  .build-marquee-set strong {
+    font-size: 11.5px;
+    font-weight: 550;
+  }
+
+  .build-marquee-sep {
+    font-size: 11px;
+  }
+
+  /* Shared section rhythm. */
+  .section {
+    padding-block: 66px;
+  }
+
+  .heading,
+  .projects-heading,
+  .skills-heading {
+    margin-bottom: 26px;
+  }
+
+  .heading > p {
+    display: none;
+  }
+
+  h2 {
+    font-size: 31px;
+    line-height: 1.08;
+    letter-spacing: -1.35px;
+  }
+
+  /* Featured projects become concise editorial cards. */
+  .projects-featured {
+    gap: 12px;
+  }
+
+  .projects-section-label {
+    margin-bottom: 10px;
+    padding-top: 0;
+    font-size: 8.5px;
+    letter-spacing: 1px;
+  }
+
+  .project--showcase {
+    border-radius: var(--mobile-card-radius);
+    box-shadow: none;
+  }
+
+  .project-media {
+    height: 168px;
+  }
+
+  .project-media img {
+    filter: saturate(0.92) contrast(1.02) brightness(0.94);
+  }
+
+  .project-signal {
+    right: 10px;
+    bottom: 10px;
+    padding: 5px 8px;
+    border-radius: 7px;
+    font-size: 8px;
+    letter-spacing: 0.35px;
+  }
+
+  .project-body {
+    min-height: 0;
+    padding: 18px;
+  }
+
+  .project--showcase .project-top {
+    margin-bottom: 13px;
+    font-size: 8px;
+    letter-spacing: 0.7px;
+  }
+
+  .project-context {
+    font-size: 8px !important;
+  }
+
+  .project--showcase h3 {
+    margin-bottom: 10px;
+    font-size: 21px;
+    line-height: 1.22;
+    letter-spacing: -0.55px;
+  }
+
+  .project-summary {
+    display: -webkit-box;
+    margin-bottom: 15px;
+    overflow: hidden;
+    color: #9da9bb;
+    font-size: 13px;
+    line-height: 1.55;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+
+  .project--showcase .tags {
+    gap: 6px;
+    margin: 0 0 15px;
+  }
+
+  .project--showcase .tags li {
+    padding: 4px 7px;
+    font-size: 8.5px;
+  }
+
+  .project--showcase .tags li:nth-child(n + 4) {
+    display: none;
+  }
+
+  .project-bottom {
+    padding-top: 12px;
+    font-size: 11px;
+  }
+
+  /* Secondary projects are intentionally list-like on a phone. */
+  .projects-secondary-header {
+    margin-top: 34px;
+    margin-bottom: 10px;
+    padding-top: 20px;
+    font-size: 8.5px;
+  }
+
+  .projects-secondary-header p {
+    display: none;
+  }
+
+  .projects-secondary {
+    gap: 9px;
+  }
+
+  .project--compact {
+    min-height: 0;
+    padding: 16px;
+    border-radius: 12px;
+    background:
+      linear-gradient(145deg, rgba(255, 255, 255, 0.025), transparent 48%),
+      rgba(13, 19, 27, 0.78);
+  }
+
+  .project--compact .project-top {
+    margin-bottom: 9px;
+    font-size: 7.8px;
+  }
+
+  .project--compact .project-context {
+    display: none;
+  }
+
+  .project--compact h3 {
+    margin-bottom: 0;
+    padding-right: 28px;
+    font-size: 17px;
+    line-height: 1.3;
+  }
+
+  .project--compact .project-summary,
+  .project--compact .tags {
+    display: none;
+  }
+
+  .project--compact .project-bottom {
+    margin-top: 12px;
+    padding-top: 10px;
+    font-size: 10.5px;
+  }
+
+  /* Experience: remove nested-card feeling and scan like a timeline. */
+  .experience {
+    padding: 64px 0;
+  }
+
+  .experience-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .experience-intro {
+    position: static;
+  }
+
+  .experience-intro .intro {
+    margin: 14px 0 20px;
+  }
+
+  .experience-path {
+    gap: 7px;
+    margin-top: 20px;
+    padding: 13px 14px;
+    border-radius: 12px;
+  }
+
+  .experience-path > div {
+    grid-template-columns: 72px minmax(0, 1fr) auto;
+    gap: 8px;
+  }
+
+  .experience-path span {
+    font-size: 7.5px;
+  }
+
+  .experience-path strong {
+    font-size: 11.5px;
+  }
+
+  .experience-path small {
+    font-size: 7px;
+  }
+
+  .experience-path i {
+    height: 10px;
+    margin-left: 35px;
+  }
+
+  .experience-note {
+    display: none;
+  }
+
+  .experience-roles {
+    gap: 12px;
+  }
+
+  .experience-role {
+    padding: 19px;
+    border-radius: var(--mobile-card-radius);
+    box-shadow: none;
+  }
+
+  .role-topline {
+    gap: 10px;
+  }
+
+  .role-topline .date {
+    font-size: 8.5px;
+  }
+
+  .role-status {
+    padding: 4px 7px;
+    font-size: 7px;
+  }
+
+  .experience-role h3 {
+    margin: 12px 0 4px;
+    font-size: 22px;
+    letter-spacing: -0.7px;
+  }
+
+  .experience-role .company {
+    margin-bottom: 11px;
+    font-size: 12px;
+  }
+
+  .role-summary {
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .role-focus-grid,
+  .role-focus-grid-compact {
+    display: block;
+    margin-top: 16px;
+    border-block: 1px solid var(--border);
+  }
+
+  .role-focus-grid > div,
+  .role-focus-grid-compact > div {
+    display: grid;
+    grid-template-columns: 96px minmax(0, 1fr);
+    gap: 12px;
+    min-height: 0;
+    padding: 11px 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+  }
+
+  .role-focus-grid > div + div {
+    border-top: 1px solid rgba(177, 193, 218, 0.11);
+  }
+
+  .role-focus-grid span {
+    margin: 2px 0 0;
+    font-size: 7.5px;
+    line-height: 1.45;
+  }
+
+  .role-focus-grid p {
+    font-size: 12px;
+    line-height: 1.55;
+  }
+
+  .experience-project-link {
+    margin-top: 14px;
+    padding: 12px 13px;
+    border-radius: 10px;
+  }
+
+  .experience-project-link > span {
+    font-size: 7px;
+  }
+
+  .experience-project-link strong {
+    font-size: 11.5px;
+    line-height: 1.45;
+  }
+
+  /* Skills read as a capability map, not five large panels. */
+  .skills-foundation {
+    gap: 7px;
+    margin-bottom: 12px;
+    padding: 12px;
+    border-radius: 11px;
+  }
+
+  .skills-foundation > span {
+    width: 100%;
+    margin: 0 0 2px;
+    font-size: 7.5px;
+  }
+
+  .skills-foundation strong {
+    padding: 4px 7px;
+    border: 1px solid rgba(177, 193, 218, 0.12);
+    border-radius: 7px;
+    background: rgba(255, 255, 255, 0.025);
+    font-size: 10.5px;
+  }
+
+  .skills-foundation i {
+    display: none;
+  }
+
+  .skills-grid {
+    grid-template-columns: 1fr;
+    gap: 9px;
+  }
+
+  .skill-card,
+  .skill-card-wide {
+    grid-column: auto;
+    min-height: 0;
+    padding: 17px;
+    border-radius: 12px;
+    box-shadow: none;
+  }
+
+  .skill-card-top {
+    margin-bottom: 12px;
+  }
+
+  .skill-card .skill-n {
+    font-size: 8.5px;
+  }
+
+  .skill-level {
+    padding: 4px 7px;
+    font-size: 7px;
+  }
+
+  .skill-card h3 {
+    margin-bottom: 7px;
+    font-size: 19px;
+    letter-spacing: -0.5px;
+  }
+
+  .skill-card > p {
+    display: -webkit-box;
+    margin-bottom: 13px;
+    overflow: hidden;
+    font-size: 12.5px;
+    line-height: 1.55;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .skill-tags {
+    gap: 5px;
+  }
+
+  .skill-tags li {
+    padding: 5px 7px;
+    font-size: 8.5px;
+  }
+
+  .skills-secondary {
+    gap: 0;
+    margin-top: 10px;
+  }
+
+  .skills-secondary > div {
+    padding: 12px 3px;
+  }
+
+  .skills-secondary > div + div {
+    border-top: 1px solid rgba(177, 193, 218, 0.1);
+  }
+
+  .skills-secondary span {
+    font-size: 7.5px;
+  }
+
+  .skills-secondary p {
+    margin-top: 4px;
+    font-size: 11px;
+  }
+
+  /* Education keeps the evidence, while removing unnecessary containers. */
+  .education {
+    padding-bottom: 66px;
+  }
+
+  .education-head {
+    gap: 14px;
+    margin-bottom: 26px;
+  }
+
+  .education-intro {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .education-layout,
+  .degree-list {
+    gap: 10px;
+  }
+
+  .degree-card {
+    padding: 18px;
+    border-radius: 13px;
+  }
+
+  .degree-card-top {
+    gap: 11px;
+    margin-bottom: 15px;
+  }
+
+  .degree-index {
+    font-size: 8px;
+  }
+
+  .degree-meta {
+    gap: 4px 12px;
+    font-size: 7.5px;
+    line-height: 1.5;
+  }
+
+  .degree-card h3 {
+    margin-bottom: 8px;
+    font-size: 21px;
+    letter-spacing: -0.65px;
+  }
+
+  .degree-summary {
+    font-size: 12.8px;
+    line-height: 1.6;
+  }
+
+  .degree-details {
+    gap: 13px;
+    margin-top: 16px;
+    padding-top: 14px;
+  }
+
+  .degree-label,
+  .certification-heading > span {
+    margin-bottom: 5px;
+    font-size: 7.5px;
+  }
+
+  .degree-details p {
+    font-size: 11.5px;
+    line-height: 1.55;
+  }
+
+  .degree-project-link {
+    margin-top: 8px;
+    font-size: 10.5px;
+  }
+
+  .degree-grade-block {
+    padding-top: 13px;
+  }
+
+  .degree-grade-block strong {
+    font-size: 20px;
+  }
+
+  .degree-grade-block small {
+    font-size: 9px;
+  }
+
+  .certification-panel {
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+  }
+
+  .certification-heading {
+    margin: 18px 0 10px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+  }
+
+  .certification-heading p {
+    font-size: 11.5px;
+    line-height: 1.55;
+  }
+
+  .certificate-list {
+    gap: 8px;
+  }
+
+  .certificate-card {
+    padding: 15px;
+    border-radius: 11px;
+  }
+
+  .certificate-card-top,
+  .certificate-card-bottom {
+    font-size: 7px;
+  }
+
+  .certificate-card h3 {
+    margin: 10px 0 6px;
+    font-size: 14px;
+  }
+
+  .certificate-card p {
+    display: -webkit-box;
+    margin-bottom: 12px;
+    overflow: hidden;
+    font-size: 11px;
+    line-height: 1.5;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .certificate-card-bottom {
+    padding-top: 10px;
+  }
+
+  /* Contact becomes a compact, tappable list. */
+  .contact-footer {
+    padding: 58px 0 22px;
+  }
+
+  .contact-title {
+    font-size: clamp(40px, 11vw, 50px);
+    letter-spacing: -2.4px;
+  }
+
+  .contact-grid {
+    gap: 8px;
+    margin-top: 30px;
+  }
+
+  .contact-card {
+    min-height: 70px;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding: 13px 14px;
+    border-radius: 12px;
+    text-align: left;
+  }
+
+  .contact-card-icon {
+    width: 38px;
+    height: 38px;
+    flex: 0 0 38px;
+    margin: 0 12px 0 0;
+  }
+
+  .contact-card-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .contact-card strong {
+    min-width: 0;
+    font-size: 13px;
+  }
+
+  .contact-card-label {
+    flex: 0 0 auto;
+    margin: 0 0 0 auto;
+    padding-left: 10px;
+    font-size: 7px;
+    letter-spacing: 1.35px;
+  }
+
+  .footer-bottom--minimal {
+    margin-top: 34px;
+    padding-top: 18px;
+    font-size: 10px;
+  }
+
+  /* Keep motion understated on touch devices. */
+  .reveal-on-scroll {
+    translate: 0 8px;
+  }
+
+  .project:hover,
+  .project--compact:hover,
+  .experience-role:hover,
+  .skill-card:hover,
+  .degree-card:hover,
+  .certificate-card:hover,
+  .contact-card:hover,
+  .case-next a:hover {
+    transform: none;
+  }
+
+  .command-trigger {
+    right: 14px;
+    bottom: calc(14px + env(safe-area-inset-bottom));
+    width: 42px;
+    height: 42px;
+  }
+
+  .scroll-progress {
+    z-index: 1200;
+  }
+
+  /* Project-detail pages: same content, calmer mobile hierarchy. */
   .case-header {
     position: -webkit-sticky;
     position: sticky;
     top: 0;
     z-index: 900;
-  }
-
-  .header {
-    background: rgba(11, 17, 25, 0.92);
-    backdrop-filter: blur(18px) saturate(130%);
-    -webkit-backdrop-filter: blur(18px) saturate(130%);
-  }
-
-  .case-header {
+    min-height: 64px;
     background: rgba(11, 17, 25, 0.94);
     backdrop-filter: blur(18px) saturate(130%);
     -webkit-backdrop-filter: blur(18px) saturate(130%);
   }
 
-  /* Keep the scroll indicator above the sticky navigation. */
-  .scroll-progress {
-    z-index: 1200;
+  .case-header.wrap {
+    padding-inline: var(--mobile-gutter);
+  }
+
+  .case-header .brand {
+    font-size: 26px;
+  }
+
+  .case-back,
+  .case-external {
+    min-height: 36px;
+    padding-inline: 9px;
+    border-radius: 9px;
+  }
+
+  .case-hero {
+    padding-block: 48px 42px;
+  }
+
+  .case-hero h1 {
+    font-size: clamp(39px, 11.5vw, 52px);
+    line-height: 1;
+    letter-spacing: -2.5px;
+  }
+
+  .case-lead {
+    margin-top: 20px;
+    font-size: 16px;
+    line-height: 1.55;
+  }
+
+  .case-meta {
+    gap: 8px;
+    margin-top: 26px;
+  }
+
+  .case-meta article {
+    min-height: 0;
+    padding: 14px;
+    border-radius: 10px;
+  }
+
+  .case-meta span,
+  .case-side-label {
+    margin-bottom: 6px;
+    font-size: 7.5px;
+  }
+
+  .case-meta strong {
+    font-size: 12.5px;
+  }
+
+  .case-content {
+    gap: 34px;
+    padding-block: 48px 62px;
+  }
+
+  .case-main section + section {
+    margin-top: 42px;
+  }
+
+  .case-main h2 {
+    margin-bottom: 14px;
+    font-size: 27px;
+    letter-spacing: -1px;
+  }
+
+  .case-main h3 {
+    margin-top: 24px;
+    font-size: 17px;
+  }
+
+  .case-main p {
+    margin-bottom: 14px;
+    font-size: 14px;
+    line-height: 1.68;
+  }
+
+  .case-list li {
+    padding: 11px 0 11px 20px;
+    font-size: 13px;
+  }
+
+  .case-list li::before {
+    top: 20px;
+  }
+
+  .case-step,
+  .case-callout,
+  .case-side-card,
+  .case-next a {
+    border-radius: 11px;
+  }
+
+  .case-step {
+    padding: 17px 16px 17px 50px;
+  }
+
+  .case-step::before {
+    top: 18px;
+    left: 16px;
+  }
+
+  .case-callout {
+    padding: 18px;
+  }
+
+  .case-side-inner {
+    gap: 9px;
+  }
+
+  .case-side-card {
+    padding: 17px;
+  }
+
+  .case-next {
+    padding-block: 38px 56px;
+  }
+
+  .case-next-grid {
+    gap: 8px;
+  }
+
+  .case-next a {
+    padding: 16px;
+  }
+
+  .case-figure {
+    border-radius: 12px;
+  }
+
+  .case-figure figcaption {
+    padding: 12px 14px 14px;
+    font-size: 12px;
+    line-height: 1.55;
+  }
+}
+
+@media (max-width: 420px) {
+  :root {
+    --mobile-gutter: 16px;
+  }
+
+  h1 {
+    font-size: clamp(47px, 15vw, 58px);
+  }
+
+  .statement {
+    font-size: 19px;
+  }
+
+  .actions {
+    grid-template-columns: 1fr;
+  }
+
+  .primary,
+  .secondary {
+    width: 100%;
+  }
+
+  .portrait img {
+    height: min(82vw, 292px);
+  }
+
+  .experience-path > div {
+    grid-template-columns: 66px minmax(0, 1fr);
+  }
+
+  .experience-path small {
+    grid-column: 2;
+  }
+
+  .experience-path i {
+    margin-left: 32px;
+  }
+
+  .role-focus-grid > div,
+  .role-focus-grid-compact > div {
+    grid-template-columns: 84px minmax(0, 1fr);
+    gap: 10px;
+  }
+
+  .contact-card-label {
+    display: none;
+  }
+
+  .command-overlay {
+    padding: 12px;
+  }
+}
+
+/* =========================================================
+   Mobile UX v3 — editorial compact
+   Mobile is a scan-first home page; desktop stays unchanged.
+   ========================================================= */
+
+.mobile-only {
+  display: none;
+}
+
+@media (max-width: 720px) {
+  :root {
+    --mobile-gutter: 18px;
+    --mobile-rule: rgba(177, 193, 218, 0.14);
+  }
+
+  .mobile-only {
+    display: block;
+  }
+
+  .wrap {
+    width: calc(100% - (var(--mobile-gutter) * 2));
+  }
+
+  /* Header: one quiet action and the command palette for everything else. */
+  .header {
+    min-height: 68px;
+    height: 68px;
+  }
+
+  .header .brand {
+    font-size: 28px;
+  }
+
+  .nav-contact {
+    min-height: 38px;
+    padding: 7px 11px;
+    border-radius: 11px;
+    font-size: 11.5px;
+  }
+
+  .nav-contact svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  /* Hero: identity first, supporting detail later. */
+  .hero {
+    gap: 26px;
+    padding-block: 54px 34px;
+  }
+
+  .hero .eyebrow {
+    margin-bottom: 17px;
+    font-size: 8.5px;
+    letter-spacing: 1.7px;
+  }
+
+  .hero h1,
+  h1 {
+    font-size: clamp(46px, 13.4vw, 56px);
+    line-height: 0.94;
+    letter-spacing: -3.2px;
+  }
+
+  .statement {
+    margin-top: 24px;
+    font-size: 20px;
+    line-height: 1.3;
+  }
+
+  .hero > div > .intro,
+  .hero-credentials {
+    display: none;
+  }
+
+  .mobile-hero-focus {
+    margin: 19px 0 0;
+    color: var(--muted-foreground);
+    font-size: 11.5px;
+    font-weight: 650;
+    line-height: 1.65;
+    letter-spacing: 0.15px;
+  }
+
+  .mobile-hero-focus span {
+    margin-inline: 5px;
+    color: var(--primary);
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 18px;
+    margin-top: 26px;
+  }
+
+  .primary {
+    width: auto;
+    min-height: 44px;
+    padding: 10px 15px;
+    border-radius: 11px;
+    font-size: 12px;
+  }
+
+  .secondary {
+    width: auto;
+    min-height: 44px;
+    padding: 10px 0;
+    border: 0;
+    background: transparent;
+    color: var(--foreground-soft);
+    font-size: 11.5px;
+  }
+
+  .secondary:hover {
+    background: transparent;
+  }
+
+  .hero aside {
+    gap: 0;
+  }
+
+  .portrait {
+    border-radius: 15px;
+  }
+
+  .portrait img {
+    height: 218px;
+    object-position: 50% 31%;
+  }
+
+  .photo-label,
+  .caption {
+    display: none;
+  }
+
+  /* On a phone the ticker delays the content more than it helps. */
+  .build-marquee {
+    display: none;
+  }
+
+  /* Shared section rhythm: fewer oversized editorial pauses. */
+  .section,
+  .experience,
+  .education {
+    padding-block: 52px;
+  }
+
+  .heading,
+  .education-head {
+    gap: 0;
+    margin-bottom: 24px;
+  }
+
+  .heading > p,
+  .education-intro {
+    display: none;
+  }
+
+  .heading h2,
+  .experience-intro h2,
+  .education-head h2 {
+    font-size: clamp(31px, 9vw, 37px);
+    line-height: 1.04;
+    letter-spacing: -1.7px;
+  }
+
+  .heading .eyebrow,
+  .experience-intro .eyebrow,
+  .education-head .eyebrow {
+    margin-bottom: 13px;
+    font-size: 8px;
+  }
+
+  /* Projects: teaser cards, not mini case studies. */
+  .projects-heading {
+    margin-bottom: 23px;
+  }
+
+  .projects-section-label {
+    margin-bottom: 12px;
+    padding: 0;
+    border: 0;
+  }
+
+  .projects-section-label span {
+    font-size: 7.5px;
+  }
+
+  .projects-section-label span:last-child {
+    display: none;
+  }
+
+  .projects-featured {
+    gap: 12px;
+  }
+
+  .project--showcase {
+    min-height: 0;
+    border-radius: 14px;
+    box-shadow: none;
+  }
+
+  .project--showcase .project-media {
+    height: 146px;
+    min-height: 146px;
+  }
+
+  .project--showcase .project-media img {
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .project-signal {
+    right: 10px;
+    bottom: 10px;
+    padding: 5px 8px;
+    border-radius: 8px;
+    font-size: 7.5px;
+    letter-spacing: 0.7px;
+  }
+
+  .project--showcase .project-body {
+    min-height: 0;
+    padding: 15px 15px 17px;
+  }
+
+  .project-top {
+    margin-bottom: 8px;
+  }
+
+  .project-top > span:first-child {
+    font-size: 7.5px;
+    letter-spacing: 1.2px;
+  }
+
+  .project-context,
+  .project--showcase .project-summary,
+  .project--showcase .tags,
+  .project--showcase .project-bottom {
+    display: none;
+  }
+
+  .project--showcase h3 {
+    margin: 0;
+    font-size: 21px;
+    line-height: 1.12;
+    letter-spacing: -0.75px;
+  }
+
+  .projects-secondary-header {
+    margin: 34px 0 5px;
+    padding: 0 0 9px;
+  }
+
+  .projects-secondary-header p {
+    display: none;
+  }
+
+  .projects-secondary-header span {
+    font-size: 7.5px;
+  }
+
+  .projects-secondary {
+    display: block;
+    border-top: 1px solid var(--mobile-rule);
+  }
+
+  .project--compact {
+    position: relative;
+    min-height: 0;
+    margin: 0;
+    padding: 15px 34px 15px 1px;
+    border: 0;
+    border-bottom: 1px solid var(--mobile-rule);
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .project--compact::after {
+    position: absolute;
+    top: 50%;
+    right: 4px;
+    content: "↗";
+    color: var(--primary-bright);
+    font-size: 16px;
+    transform: translateY(-50%);
+  }
+
+  .project--compact .project-top {
+    margin-bottom: 4px;
+  }
+
+  .project--compact .project-context,
+  .project--compact .project-summary,
+  .project--compact .tags,
+  .project--compact .project-bottom {
+    display: none;
+  }
+
+  .project--compact h3 {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.3;
+    letter-spacing: -0.3px;
+  }
+
+  /* Experience: a timeline summary, not a full CV card. */
+  .experience {
+    background: rgba(15, 22, 32, 0.48);
+  }
+
+  .experience-grid {
+    gap: 24px;
+  }
+
+  .experience-intro .intro,
+  .experience-path,
+  .experience-note {
+    display: none;
+  }
+
+  .experience-roles {
+    gap: 0;
+    border-top: 1px solid var(--mobile-rule);
+  }
+
+  .experience-role,
+  .experience-role-current {
+    min-height: 0;
+    padding: 22px 1px;
+    border: 0;
+    border-bottom: 1px solid var(--mobile-rule);
+    border-radius: 0;
+    background: transparent !important;
+    box-shadow: none;
+  }
+
+  .role-topline {
+    margin-bottom: 10px;
+  }
+
+  .role-topline .date {
+    font-size: 7.5px;
+    letter-spacing: 1.15px;
+  }
+
+  .role-status {
+    padding: 3px 6px;
+    font-size: 6.5px;
+  }
+
+  .experience-role h3 {
+    margin: 0 0 3px;
+    font-size: 22px;
+    letter-spacing: -0.7px;
+  }
+
+  .experience-role .company {
+    margin: 0;
+    font-size: 11.5px;
+  }
+
+  .role-summary,
+  .role-focus-grid,
+  .role-focus-grid-compact {
+    display: none !important;
+  }
+
+  .mobile-role-focus {
+    margin: 10px 0 0;
+    color: var(--muted-foreground);
+    font-size: 10.5px;
+    line-height: 1.6;
+  }
+
+  .mobile-role-focus span {
+    margin-inline: 4px;
+    color: var(--primary);
+  }
+
+  .experience-project-link {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 3px 10px;
+    margin-top: 14px;
+    padding: 11px 0 0;
+    border: 0;
+    border-top: 1px solid rgba(177, 193, 218, 0.1);
+    border-radius: 0;
+    background: transparent;
+  }
+
+  .experience-project-link > span {
+    grid-column: 1;
+    font-size: 6.5px;
+  }
+
+  .experience-project-link strong {
+    grid-column: 1;
+    font-size: 11px;
+    line-height: 1.4;
+  }
+
+  .experience-project-link svg {
+    grid-column: 2;
+    grid-row: 1 / 3;
+    align-self: center;
+  }
+
+  /* Skills: five compact capability rows. */
+  .skills-foundation {
+    display: flex;
+    gap: 0;
+    margin: 0 0 12px;
+    padding: 0 0 14px;
+    border: 0;
+    border-bottom: 1px solid var(--mobile-rule);
+    border-radius: 0;
+    background: transparent;
+  }
+
+  .skills-foundation > span,
+  .skills-foundation i {
+    display: none;
+  }
+
+  .skills-foundation strong {
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--muted-foreground);
+    font-size: 9.5px;
+    font-weight: 600;
+  }
+
+  .skills-foundation strong + strong::before {
+    content: " · ";
+    margin-inline: 5px;
+    color: var(--primary);
+  }
+
+  .skills-grid {
+    display: block;
+    border-top: 1px solid var(--mobile-rule);
+  }
+
+  .skill-card,
+  .skill-card-featured,
+  .skill-card-wide {
+    min-height: 0;
+    margin: 0;
+    padding: 15px 1px;
+    border: 0;
+    border-bottom: 1px solid var(--mobile-rule);
+    border-radius: 0;
+    background: transparent !important;
+    box-shadow: none;
+  }
+
+  .skill-card-top,
+  .skill-card > p {
+    display: none;
+  }
+
+  .skill-card h3 {
+    margin: 0 0 6px;
+    font-size: 17px;
+    letter-spacing: -0.35px;
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+  }
+
+  .skill-tags li {
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: var(--muted-foreground);
+    font-size: 9.5px;
+    line-height: 1.6;
+  }
+
+  .skill-tags li:not(:last-child)::after {
+    content: " · ";
+    margin-right: 5px;
+    color: var(--primary);
+  }
+
+  .skill-tags li:nth-child(n + 5) {
+    display: none;
+  }
+
+  .skills-secondary {
+    margin-top: 13px;
+  }
+
+  .skills-secondary > div {
+    padding: 8px 1px;
+  }
+
+  .skills-secondary span {
+    font-size: 6.5px;
+  }
+
+  .skills-secondary p {
+    margin-top: 2px;
+    font-size: 9.5px;
+  }
+
+  /* Education: degree proof points and certificate links only. */
+  .education-layout,
+  .degree-list {
+    gap: 0;
+  }
+
+  .degree-list {
+    border-top: 1px solid var(--mobile-rule);
+  }
+
+  .degree-card,
+  .degree-card-featured {
+    min-height: 0;
+    margin: 0;
+    padding: 18px 1px;
+    border: 0;
+    border-bottom: 1px solid var(--mobile-rule);
+    border-radius: 0;
+    background: transparent !important;
+    box-shadow: none;
+  }
+
+  .degree-card-top {
+    margin-bottom: 8px;
+  }
+
+  .degree-index {
+    display: none;
+  }
+
+  .degree-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px 10px;
+    font-size: 6.8px;
+  }
+
+  .degree-card h3 {
+    margin: 0;
+    font-size: 19px;
+    letter-spacing: -0.45px;
+  }
+
+  .degree-summary,
+  .degree-details > div:first-child {
+    display: none;
+  }
+
+  .degree-details {
+    display: block;
+    margin-top: 8px;
+    padding: 0;
+    border: 0;
+  }
+
+  .degree-grade-block {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    padding: 0;
+    border: 0;
+  }
+
+  .degree-grade-block .degree-label {
+    display: none;
+  }
+
+  .degree-grade-block strong {
+    font-size: 13px;
+    color: var(--foreground-soft);
+  }
+
+  .degree-grade-block small {
+    font-size: 8px;
+    color: var(--muted-foreground);
+  }
+
+  .certification-panel {
+    margin-top: 26px;
+  }
+
+  .certification-heading {
+    margin: 0 0 7px;
+    padding: 0;
+    border: 0;
+  }
+
+  .certification-heading > span {
+    margin: 0;
+    font-size: 7.5px;
+  }
+
+  .certification-heading p {
+    display: none;
+  }
+
+  .certificate-list {
+    gap: 0;
+    border-top: 1px solid var(--mobile-rule);
+  }
+
+  .certificate-card {
+    position: relative;
+    min-height: 0;
+    padding: 14px 30px 14px 1px;
+    border: 0;
+    border-bottom: 1px solid var(--mobile-rule);
+    border-radius: 0;
+    background: transparent;
+  }
+
+  .certificate-card::after {
+    position: absolute;
+    top: 50%;
+    right: 4px;
+    content: "↗";
+    color: var(--primary-bright);
+    font-size: 14px;
+    transform: translateY(-50%);
+  }
+
+  .certificate-card-top {
+    margin: 0 0 4px;
+    font-size: 6.5px;
+  }
+
+  .certificate-card h3 {
+    margin: 0;
+    padding-right: 8px;
+    font-size: 13px;
+    line-height: 1.35;
+  }
+
+  .certificate-card p,
+  .certificate-card-bottom {
+    display: none;
+  }
+
+  /* Contact was already compact; tighten its vertical rhythm slightly. */
+  .contact-footer {
+    padding: 48px 0 20px;
+  }
+
+  .contact-title {
+    font-size: clamp(36px, 10vw, 44px);
+  }
+
+  .contact-grid {
+    margin-top: 24px;
+  }
+
+  .contact-card {
+    min-height: 62px;
+    padding-block: 10px;
+  }
+
+  /* Less visual obstruction over content on a small viewport. */
+  .command-trigger {
+    width: 38px;
+    height: 38px;
+    right: 11px;
+    bottom: calc(11px + env(safe-area-inset-bottom));
+    opacity: 0.88;
+  }
+}
+
+@media (max-width: 420px) {
+  :root {
+    --mobile-gutter: 16px;
+  }
+
+  .hero {
+    padding-top: 46px;
+  }
+
+  .hero h1,
+  h1 {
+    font-size: clamp(44px, 13.5vw, 53px);
+  }
+
+  .statement {
+    font-size: 19px;
+  }
+
+  .actions {
+    align-items: center;
+  }
+
+  .portrait img {
+    height: 198px;
+  }
+
+  .project--showcase .project-media {
+    height: 132px;
+    min-height: 132px;
+  }
+
+  .project--showcase h3 {
+    font-size: 20px;
+  }
+
+  .heading h2,
+  .experience-intro h2,
+  .education-head h2 {
+    font-size: 31px;
+  }
+}
+
+/* =========================================================
+   Mobile UX v4 — native mobile composition
+   Dedicated mobile presentation for projects, experience,
+   skills and education. Desktop remains unchanged.
+   ========================================================= */
+
+@media (max-width: 720px) {
+  /* True full-bleed mobile top bar. */
+  .header.wrap {
+    width: 100vw;
+    max-width: none;
+    margin: 0;
+    padding-right: max(var(--mobile-gutter), env(safe-area-inset-right));
+    padding-left: max(var(--mobile-gutter), env(safe-area-inset-left));
+    background: rgba(7, 13, 22, 0.97);
+  }
+
+  .header::before {
+    display: none !important;
+  }
+
+  /* The portrait works on desktop, but competes with content on a phone. */
+  .hero aside {
+    display: none;
+  }
+
+  .hero {
+    padding-top: 44px;
+    padding-bottom: 34px;
+  }
+
+  /* Restore the signature ticker, but keep it deliberately compact. */
+  .build-marquee {
+    display: block !important;
+    min-height: 46px;
+    border-top: 1px solid rgba(177, 193, 218, 0.12);
+    border-bottom: 1px solid rgba(177, 193, 218, 0.12);
+  }
+
+  .build-marquee-inner {
+    min-height: 46px;
+    gap: 14px;
+  }
+
+  .build-marquee-label {
+    flex: 0 0 auto;
+    padding-right: 12px;
+    font-size: 7px;
+    letter-spacing: 1.25px;
+  }
+
+  .build-marquee-window {
+    min-width: 0;
+  }
+
+  .build-marquee-track {
+    gap: 23px;
+    animation-duration: 54s;
+  }
+
+  .build-marquee-set {
+    gap: 15px;
+  }
+
+  .build-marquee-set strong {
+    font-size: 10px;
+    white-space: nowrap;
+  }
+
+  .build-marquee-sep {
+    font-size: 8px;
+  }
+
+  /* Projects: dedicated 2x2 mobile grid. */
+  .projects-featured,
+  .projects-secondary-header,
+  .projects-secondary {
+    display: none !important;
+  }
+
+  .mobile-project-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .mobile-project-card {
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid rgba(177, 193, 218, 0.17);
+    border-radius: 14px;
+    background:
+      linear-gradient(180deg, rgba(37, 49, 72, 0.68), rgba(17, 25, 37, 0.92));
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
+  }
+
+  .mobile-project-media {
+    position: relative;
+    height: 96px;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(177, 193, 218, 0.12);
+    background: #e8ebef;
+  }
+
+  .mobile-project-media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(0.92) contrast(1.02) brightness(0.94);
+  }
+
+  .mobile-project-signal {
+    position: absolute;
+    right: 7px;
+    bottom: 7px;
+    max-width: calc(100% - 14px);
+    padding: 4px 6px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 7px;
+    background: rgba(8, 13, 21, 0.82);
+    color: #e3e8ff;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    font-size: 6.3px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0.3px;
+    text-align: right;
+  }
+
+  .mobile-project-copy {
+    padding: 11px 10px 10px;
+  }
+
+  .mobile-project-kicker {
+    display: block;
+    margin-bottom: 5px;
+    color: #99a8c1;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    font-size: 6.2px;
+    font-weight: 700;
+    letter-spacing: 0.85px;
+  }
+
+  .mobile-project-card h3 {
+    min-height: 34px;
+    margin: 0;
+    color: var(--foreground);
+    font-size: 14px;
+    line-height: 1.18;
+    letter-spacing: -0.35px;
+  }
+
+  .mobile-project-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    margin-top: 10px;
+  }
+
+  .mobile-project-actions a,
+  .mobile-project-action-muted {
+    display: flex;
+    min-width: 0;
+    min-height: 30px;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 6px;
+    border: 1px solid rgba(177, 193, 218, 0.18);
+    border-radius: 8px;
+    font-size: 8px;
+    font-weight: 700;
+    line-height: 1.1;
+    text-align: center;
+  }
+
+  .mobile-project-actions a {
+    background: rgba(144, 161, 255, 0.08);
+    color: #dce3ff;
+  }
+
+  .mobile-project-action-muted {
+    color: #7d899c;
+    background: rgba(255, 255, 255, 0.018);
+  }
+
+  .mobile-more-projects {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 14px;
+    padding: 13px 1px;
+    border-top: 1px solid var(--mobile-rule);
+    border-bottom: 1px solid var(--mobile-rule);
+    color: var(--foreground-soft);
+  }
+
+  .mobile-more-projects span {
+    display: grid;
+    gap: 3px;
+    font-size: 11.5px;
+    font-weight: 650;
+  }
+
+  .mobile-more-projects small {
+    color: #78869b;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    font-size: 6.5px;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+
+  .mobile-more-projects svg {
+    flex: 0 0 auto;
+    color: var(--primary-bright);
+  }
+
+  /* Experience: explicit career timeline. */
+  .experience-roles {
+    display: none !important;
+  }
+
+  .mobile-experience-timeline {
+    position: relative;
+    display: grid !important;
+    gap: 0;
+    margin-top: 4px;
+    padding-left: 25px;
+  }
+
+  .mobile-experience-timeline::before {
+    position: absolute;
+    top: 8px;
+    bottom: 18px;
+    left: 6px;
+    width: 1px;
+    content: "";
+    background: linear-gradient(180deg, rgba(151, 170, 255, 0.72), rgba(151, 170, 255, 0.12));
+  }
+
+  .mobile-experience-item {
+    position: relative;
+    padding: 0 0 27px 4px;
+  }
+
+  .mobile-experience-item:last-child {
+    padding-bottom: 0;
+  }
+
+  .mobile-experience-item::before {
+    position: absolute;
+    top: 5px;
+    left: -23px;
+    width: 9px;
+    height: 9px;
+    content: "";
+    border: 2px solid #0e1724;
+    border-radius: 50%;
+    background: #8295ff;
+    box-shadow: 0 0 0 3px rgba(130, 149, 255, 0.13);
+  }
+
+  .mobile-experience-item:not(.is-current)::before {
+    background: #5f6d83;
+    box-shadow: none;
+  }
+
+  .mobile-experience-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+
+  .mobile-experience-meta span,
+  .mobile-experience-meta strong {
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    font-size: 6.6px;
+    font-weight: 700;
+    letter-spacing: 0.85px;
+  }
+
+  .mobile-experience-meta span {
+    color: #78869b;
+  }
+
+  .mobile-experience-meta strong {
+    padding: 3px 6px;
+    border: 1px solid rgba(151, 170, 255, 0.2);
+    border-radius: 999px;
+    color: #aab7ff;
+  }
+
+  .mobile-experience-item h3 {
+    margin: 0 0 3px;
+    font-size: 21px;
+    letter-spacing: -0.7px;
+  }
+
+  .mobile-experience-company {
+    margin: 0;
+    color: var(--foreground-soft);
+    font-size: 11px;
+    font-weight: 600;
+  }
+
+  .mobile-experience-focus {
+    margin: 9px 0 11px;
+    color: #8290a4;
+    font-size: 9.5px;
+    line-height: 1.55;
+  }
+
+  .mobile-experience-item > a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 9px 0 0;
+    border-top: 1px solid rgba(177, 193, 218, 0.1);
+    color: #cdd5e4;
+    font-size: 10px;
+    font-weight: 650;
+    line-height: 1.35;
+  }
+
+  .mobile-experience-item > a span {
+    color: var(--primary-bright);
+    font-size: 13px;
+  }
+
+  /* Skills: capability map instead of a vertical list of tags. */
+  .skills-foundation,
+  .skills-grid,
+  .skills-secondary {
+    display: none !important;
+  }
+
+  .mobile-skills-map {
+    display: block !important;
+  }
+
+  .mobile-skills-core {
+    display: grid;
+    gap: 4px;
+    margin-bottom: 12px;
+    padding: 0 0 13px;
+    border-bottom: 1px solid var(--mobile-rule);
+  }
+
+  .mobile-skills-core span {
+    color: #758296;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    font-size: 6.5px;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+
+  .mobile-skills-core strong {
+    color: #cbd4e4;
+    font-size: 10.5px;
+    font-weight: 620;
+  }
+
+  .mobile-skills-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 9px;
+  }
+
+  .mobile-skills-grid article {
+    position: relative;
+    min-width: 0;
+    min-height: 116px;
+    padding: 12px 11px;
+    border: 1px solid rgba(177, 193, 218, 0.15);
+    border-radius: 12px;
+    background: linear-gradient(145deg, rgba(40, 53, 78, 0.58), rgba(15, 23, 34, 0.72));
+  }
+
+  .mobile-skills-grid .mobile-skill-wide {
+    grid-column: 1 / -1;
+    min-height: 96px;
+  }
+
+  .mobile-skill-index {
+    display: block;
+    margin-bottom: 12px;
+    color: #758296;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    font-size: 6.5px;
+    font-weight: 700;
+    letter-spacing: 0.9px;
+  }
+
+  .mobile-skills-grid h3 {
+    margin: 0 0 5px;
+    font-size: 14px;
+    line-height: 1.15;
+    letter-spacing: -0.35px;
+  }
+
+  .mobile-skills-grid p {
+    margin: 0 0 8px;
+    color: #9ba8bb;
+    font-size: 8.7px;
+    line-height: 1.4;
+  }
+
+  .mobile-skills-grid small {
+    color: #77869b;
+    font-size: 7.6px;
+    line-height: 1.45;
+  }
+
+  .mobile-skills-footer {
+    margin-top: 12px;
+    color: #7f8ca0;
+    font-size: 8.8px;
+    line-height: 1.55;
+  }
+
+  .mobile-skills-footer span {
+    margin-right: 6px;
+    color: #aebaff;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    font-size: 6.5px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+  }
+
+  /* Education: concise academic timeline with proof points. */
+  .education-layout {
+    display: none !important;
+  }
+
+  .mobile-education-summary {
+    display: block !important;
+  }
+
+  .mobile-education-timeline {
+    position: relative;
+    display: grid;
+    gap: 0;
+    padding-left: 24px;
+  }
+
+  .mobile-education-timeline::before {
+    position: absolute;
+    top: 8px;
+    bottom: 16px;
+    left: 6px;
+    width: 1px;
+    content: "";
+    background: rgba(151, 170, 255, 0.24);
+  }
+
+  .mobile-degree-item {
+    position: relative;
+    padding: 0 0 23px 4px;
+  }
+
+  .mobile-degree-item:last-child {
+    padding-bottom: 7px;
+  }
+
+  .mobile-degree-item::before {
+    position: absolute;
+    top: 5px;
+    left: -22px;
+    width: 8px;
+    height: 8px;
+    content: "";
+    border-radius: 50%;
+    background: #8396ff;
+    box-shadow: 0 0 0 3px rgba(131, 150, 255, 0.1);
+  }
+
+  .mobile-degree-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px 10px;
+    margin-bottom: 7px;
+  }
+
+  .mobile-degree-meta span,
+  .mobile-degree-meta strong {
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    font-size: 6.4px;
+    font-weight: 700;
+    letter-spacing: 0.75px;
+  }
+
+  .mobile-degree-meta span {
+    color: #78869b;
+  }
+
+  .mobile-degree-meta strong {
+    color: #a9b6ff;
+  }
+
+  .mobile-degree-item h3 {
+    margin: 0 0 3px;
+    font-size: 18px;
+    letter-spacing: -0.45px;
+  }
+
+  .mobile-degree-item p {
+    margin: 0;
+    color: #98a5b8;
+    font-size: 10.5px;
+  }
+
+  .mobile-degree-item > a {
+    display: inline-flex;
+    gap: 6px;
+    margin-top: 8px;
+    color: #b9c4ff;
+    font-size: 9px;
+    font-weight: 650;
+  }
+
+  .mobile-certifications {
+    display: grid;
+    gap: 0;
+    margin-top: 14px;
+    border-top: 1px solid var(--mobile-rule);
+  }
+
+  .mobile-certifications-label {
+    padding: 13px 0 6px;
+    color: #758296;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    font-size: 6.5px;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+
+  .mobile-certifications a {
+    position: relative;
+    display: grid;
+    gap: 3px;
+    padding: 10px 24px 10px 0;
+    border-bottom: 1px solid rgba(177, 193, 218, 0.1);
+  }
+
+  .mobile-certifications a > span {
+    color: #758296;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    font-size: 6.2px;
+    font-weight: 700;
+    letter-spacing: 0.75px;
+  }
+
+  .mobile-certifications a strong {
+    color: #cbd4e4;
+    font-size: 10.5px;
+    font-weight: 650;
+    line-height: 1.35;
+  }
+
+  .mobile-certifications a i {
+    position: absolute;
+    top: 50%;
+    right: 2px;
+    color: var(--primary-bright);
+    font-size: 13px;
+    font-style: normal;
+    transform: translateY(-50%);
+  }
+}
+
+@media (max-width: 360px) {
+  .mobile-project-grid,
+  .mobile-skills-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mobile-skills-grid .mobile-skill-wide {
+    grid-column: auto;
+  }
+
+  .mobile-project-media {
+    height: 112px;
+  }
+}
+
+/* =========================================================
+   Mobile UX v4.1 — final polish
+   Full-bleed header + lighter capability ladder.
+   ========================================================= */
+@media (max-width: 720px) {
+  .header.wrap {
+    inset-inline: 0;
+    width: 100%;
+    max-width: none;
+    margin-inline: 0;
+    box-sizing: border-box;
+    border-radius: 0;
+  }
+
+  .mobile-project-actions a,
+  .mobile-project-action-muted {
+    font-size: 7.4px;
+    letter-spacing: -0.05px;
+  }
+
+  .mobile-skills-grid {
+    display: none !important;
+  }
+
+  .mobile-skill-ladder {
+    position: relative;
+    display: grid;
+    margin-top: 2px;
+    padding-left: 28px;
+  }
+
+  .mobile-skill-ladder::before {
+    position: absolute;
+    top: 11px;
+    bottom: 14px;
+    left: 7px;
+    width: 1px;
+    content: "";
+    background: linear-gradient(180deg, rgba(145, 163, 255, 0.62), rgba(145, 163, 255, 0.08));
+  }
+
+  .mobile-skill-row {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr;
+    min-width: 0;
+    padding: 0 0 18px 2px;
+    border: 0;
+    background: transparent;
+  }
+
+  .mobile-skill-row:last-child {
+    padding-bottom: 6px;
+  }
+
+  .mobile-skill-row::before {
+    position: absolute;
+    top: 7px;
+    left: -25px;
+    width: 7px;
+    height: 7px;
+    content: "";
+    border: 2px solid #0e1724;
+    border-radius: 50%;
+    background: #8396ff;
+    box-shadow: 0 0 0 3px rgba(131, 150, 255, 0.1);
+  }
+
+  .mobile-skill-index {
+    position: absolute;
+    top: 3px;
+    left: -55px;
+    width: 22px;
+    margin: 0;
+    color: #66758b;
+    font-size: 6.1px;
+    text-align: right;
+  }
+
+  .mobile-skill-content {
+    min-width: 0;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(177, 193, 218, 0.1);
+  }
+
+  .mobile-skill-row:last-child .mobile-skill-content {
+    padding-bottom: 8px;
+    border-bottom: 0;
+  }
+
+  .mobile-skill-heading {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .mobile-skill-heading h3 {
+    margin: 0;
+    color: var(--foreground);
+    font-size: 15px;
+    line-height: 1.2;
+    letter-spacing: -0.35px;
+  }
+
+  .mobile-skill-heading em {
+    flex: 0 0 auto;
+    color: #8f9ffc;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    font-size: 5.8px;
+    font-style: normal;
+    font-weight: 700;
+    letter-spacing: 0.85px;
+  }
+
+  .mobile-skill-content p {
+    margin: 4px 0 5px;
+    color: #97a4b7;
+    font-size: 9px;
+    line-height: 1.35;
+  }
+
+  .mobile-skill-content small {
+    display: block;
+    color: #6f7e93;
+    font-size: 7.7px;
+    line-height: 1.45;
+  }
+
+  .mobile-skills-footer {
+    margin-top: 9px;
+    padding-top: 10px;
+    border-top: 1px solid var(--mobile-rule);
+  }
+}
+
+/* =========================================================
+   Mobile Skills v5 — interactive capability rail
+   Progressive disclosure keeps the section compact while
+   connecting selected capabilities to concrete portfolio work.
+   ========================================================= */
+@media (max-width: 720px) {
+  .mobile-skills-map {
+    display: none !important;
+  }
+
+  .mobile-skills-rail {
+    display: block !important;
+  }
+
+  .mobile-skills-rail-intro {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 18px;
+    margin-bottom: 14px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(177, 193, 218, 0.11);
+  }
+
+  .mobile-skills-rail-intro > span {
+    flex: 0 0 auto;
+    color: #8796ff;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    font-size: 6.4px;
+    font-weight: 750;
+    letter-spacing: 1.05px;
+  }
+
+  .mobile-skills-rail-intro p {
+    max-width: 190px;
+    margin: 0;
+    color: #7f8da1;
+    font-size: 8.6px;
+    line-height: 1.45;
+    text-align: right;
+  }
+
+  .mobile-capability-rail {
+    position: relative;
+    padding-left: 23px;
+  }
+
+  .mobile-capability-rail::before {
+    position: absolute;
+    top: 19px;
+    bottom: 19px;
+    left: 5px;
+    width: 1px;
+    content: "";
+    background: linear-gradient(
+      180deg,
+      rgba(130, 153, 255, 0.78) 0%,
+      rgba(170, 137, 255, 0.48) 48%,
+      rgba(99, 188, 255, 0.18) 100%
+    );
+  }
+
+  .mobile-capability {
+    position: relative;
+    border-bottom: 1px solid rgba(177, 193, 218, 0.1);
+  }
+
+  .mobile-capability::before {
+    position: absolute;
+    top: 21px;
+    left: -21px;
+    z-index: 2;
+    width: 7px;
+    height: 7px;
+    content: "";
+    border: 2px solid #0d1520;
+    border-radius: 50%;
+    background: #6f7e94;
+    box-shadow: 0 0 0 3px rgba(132, 153, 255, 0.055);
+    transition:
+      background 180ms ease,
+      box-shadow 180ms ease,
+      transform 180ms ease;
+  }
+
+  .mobile-capability[open]::before {
+    background: #91a3ff;
+    box-shadow:
+      0 0 0 4px rgba(145, 163, 255, 0.09),
+      0 0 18px rgba(145, 163, 255, 0.28);
+    transform: scale(1.08);
+  }
+
+  .mobile-capability-trigger {
+    display: grid;
+    grid-template-columns: 22px minmax(0, 1fr) 20px;
+    gap: 9px;
+    align-items: center;
+    width: 100%;
+    min-height: 55px;
+    padding: 10px 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .mobile-capability-trigger {
+    list-style: none;
+  }
+
+  .mobile-capability-trigger::-webkit-details-marker {
+    display: none;
+  }
+
+  .mobile-capability-trigger::marker {
+    content: "";
+  }
+
+  .mobile-capability-trigger:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 4px;
+    border-radius: 8px;
+  }
+
+  .mobile-capability-index {
+    color: #627187;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    font-size: 6.2px;
+    font-weight: 700;
+    letter-spacing: 0.65px;
+  }
+
+  .mobile-capability-title {
+    display: grid;
+    gap: 2px;
+    min-width: 0;
+  }
+
+  .mobile-capability-title strong {
+    color: #eef2f8;
+    font-size: 14.2px;
+    font-weight: 610;
+    line-height: 1.2;
+    letter-spacing: -0.4px;
+  }
+
+  .mobile-capability-title small {
+    color: #728096;
+    font-size: 7.6px;
+    line-height: 1.35;
+  }
+
+  .mobile-capability-toggle {
+    position: relative;
+    width: 18px;
+    height: 18px;
+    border: 1px solid rgba(165, 180, 210, 0.16);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.018);
+  }
+
+  .mobile-capability-toggle::before,
+  .mobile-capability-toggle::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 7px;
+    height: 1px;
+    content: "";
+    background: #9daaff;
+    transform: translate(-50%, -50%);
+    transition: transform 180ms ease, opacity 180ms ease;
+  }
+
+  .mobile-capability-toggle::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+  }
+
+  .mobile-capability[open] .mobile-capability-toggle::after {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  .mobile-capability-panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    transition:
+      grid-template-rows 260ms cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 180ms ease;
+  }
+
+  .mobile-capability[open] .mobile-capability-panel {
+    grid-template-rows: 1fr;
+    opacity: 1;
+  }
+
+  .mobile-capability-panel-inner {
+    min-height: 0;
+    overflow: hidden;
+    padding: 0 0 0;
+  }
+
+  .mobile-capability[open] .mobile-capability-panel-inner {
+    padding-bottom: 15px;
+  }
+
+  .mobile-capability-panel-inner > p {
+    max-width: 310px;
+    margin: 1px 0 10px;
+    color: #95a2b5;
+    font-size: 9.2px;
+    line-height: 1.55;
+  }
+
+  .mobile-capability-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 11px;
+  }
+
+  .mobile-capability-tags span {
+    display: inline-flex;
+    align-items: center;
+    min-height: 23px;
+    padding: 0 8px;
+    border: 1px solid rgba(156, 173, 209, 0.13);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.025);
+    color: #aab6c7;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    font-size: 6.7px;
+    font-weight: 650;
+    letter-spacing: 0.12px;
+  }
+
+  .mobile-capability-proof,
+  .mobile-capability-context {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 2px 12px;
+    align-items: center;
+    padding: 9px 10px;
+    border: 1px solid rgba(143, 161, 255, 0.13);
+    border-radius: 9px;
+    background: linear-gradient(90deg, rgba(137, 155, 255, 0.055), rgba(255, 255, 255, 0.012));
+  }
+
+  .mobile-capability-proof > span,
+  .mobile-capability-context > span {
+    color: #708098;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    font-size: 5.7px;
+    font-weight: 700;
+    letter-spacing: 0.72px;
+    text-transform: uppercase;
+  }
+
+  .mobile-capability-proof strong,
+  .mobile-capability-context strong {
+    color: #cbd5e5;
+    font-size: 8.5px;
+    font-weight: 620;
+    line-height: 1.35;
+  }
+
+  .mobile-capability-proof i {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    color: var(--primary-bright);
+    font-size: 12px;
+    font-style: normal;
+  }
+
+  .mobile-capability-context {
+    grid-template-columns: 1fr;
+  }
+
+  .mobile-skills-foundation-strip {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 5px 7px;
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(177, 193, 218, 0.11);
+  }
+
+  .mobile-skills-foundation-strip > span {
+    width: 100%;
+    margin-bottom: 1px;
+    color: #7b899d;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    font-size: 6px;
+    font-weight: 750;
+    letter-spacing: 1px;
+  }
+
+  .mobile-skills-foundation-strip strong {
+    color: #b9c3d2;
+    font-size: 8.2px;
+    font-weight: 620;
+  }
+
+  .mobile-skills-foundation-strip i {
+    color: rgba(143, 161, 255, 0.48);
+    font-size: 7px;
+    font-style: normal;
+  }
+}
+
+@media (max-width: 380px) {
+  .mobile-skills-rail-intro {
+    display: grid;
+    gap: 5px;
+  }
+
+  .mobile-skills-rail-intro p {
+    max-width: none;
+    text-align: left;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile-capability-panel,
+  .mobile-capability-toggle::before,
+  .mobile-capability-toggle::after,
+  .mobile-capability::before {
+    transition: none !important;
+  }
+}
+
+/* =========================================================
+   Mobile Skills v5.2 — browser-native checkbox accordion
+   No JavaScript and no <details>: the label toggles a real
+   checkbox, making interaction reliable across mobile browsers.
+   ========================================================= */
+@media (max-width: 720px) {
+  .mobile-capability-rail {
+    position: relative;
+    padding-left: 23px;
+  }
+
+  .mobile-capability-rail::before {
+    position: absolute;
+    top: 19px;
+    bottom: 19px;
+    left: 5px;
+    width: 1px;
+    content: "";
+    background: linear-gradient(
+      180deg,
+      rgba(130, 153, 255, 0.78) 0%,
+      rgba(170, 137, 255, 0.48) 48%,
+      rgba(99, 188, 255, 0.18) 100%
+    );
+  }
+
+  .mobile-capability {
+    position: relative;
+    border-bottom: 1px solid rgba(177, 193, 218, 0.1);
+  }
+
+  .mobile-skill-toggle-input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .mobile-capability-trigger {
+    position: relative;
+    display: grid;
+    grid-template-columns: 22px minmax(0, 1fr) 20px;
+    gap: 9px;
+    align-items: center;
+    width: 100%;
+    min-height: 55px;
+    padding: 10px 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  .mobile-capability-trigger::before {
+    position: absolute;
+    top: 50%;
+    left: -21px;
+    z-index: 2;
+    width: 7px;
+    height: 7px;
+    content: "";
+    border: 2px solid #0d1520;
+    border-radius: 50%;
+    background: #6f7e94;
+    box-shadow: 0 0 0 3px rgba(132, 153, 255, 0.055);
+    transform: translateY(-50%);
+    transition: background 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+  }
+
+  .mobile-skill-toggle-input:focus-visible + .mobile-capability-trigger {
+    outline: 2px solid var(--primary);
+    outline-offset: 4px;
+    border-radius: 8px;
+  }
+
+  .mobile-skill-toggle-input:checked + .mobile-capability-trigger::before {
+    background: #91a3ff;
+    box-shadow:
+      0 0 0 4px rgba(145, 163, 255, 0.09),
+      0 0 18px rgba(145, 163, 255, 0.28);
+    transform: translateY(-50%) scale(1.08);
+  }
+
+  .mobile-capability-toggle {
+    position: relative;
+    width: 18px;
+    height: 18px;
+    border: 1px solid rgba(165, 180, 210, 0.16);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.018);
+  }
+
+  .mobile-capability-toggle::before,
+  .mobile-capability-toggle::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 7px;
+    height: 1px;
+    content: "";
+    background: #9daaff;
+    transform: translate(-50%, -50%);
+    transition: transform 180ms ease, opacity 180ms ease;
+  }
+
+  .mobile-capability-toggle::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+  }
+
+  .mobile-skill-toggle-input:checked + .mobile-capability-trigger .mobile-capability-toggle::after {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  .mobile-capability-panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      grid-template-rows 260ms cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 180ms ease,
+      visibility 0s linear 260ms;
+  }
+
+  .mobile-skill-toggle-input:checked + .mobile-capability-trigger + .mobile-capability-panel {
+    grid-template-rows: 1fr;
+    opacity: 1;
+    visibility: visible;
+    transition:
+      grid-template-rows 260ms cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 180ms ease,
+      visibility 0s;
+  }
+
+  .mobile-capability-panel-inner {
+    min-height: 0;
+    overflow: hidden;
+    padding: 0;
+  }
+
+  .mobile-skill-toggle-input:checked + .mobile-capability-trigger + .mobile-capability-panel .mobile-capability-panel-inner {
+    padding-bottom: 15px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile-capability-panel,
+  .mobile-capability-toggle::before,
+  .mobile-capability-toggle::after,
+  .mobile-capability-trigger::before {
+    transition: none !important;
+  }
+}
+
+/* =========================================================
+   Mobile Skills v6 — compact bento capability matrix
+   Static by design: no checkbox, accordion, or JavaScript.
+   ========================================================= */
+@media (max-width: 720px) {
+  .mobile-skills-rail,
+  .mobile-capability-rail,
+  .mobile-skill-toggle-input {
+    display: none !important;
+  }
+
+  .mobile-skills-bento {
+    display: block !important;
+    margin-top: 16px;
+  }
+
+  .mobile-skills-bento-intro {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 14px;
+    margin-bottom: 11px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(177, 193, 218, 0.12);
+  }
+
+  .mobile-skills-bento-intro span {
+    color: #9eabff;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    font-size: 6.8px;
+    font-weight: 800;
+    letter-spacing: 1.15px;
+  }
+
+  .mobile-skills-bento-intro p {
+    margin: 0;
+    color: #77869b;
+    font-size: 8.3px;
+    line-height: 1.3;
+  }
+
+  .mobile-skills-bento-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 9px;
+  }
+
+  .mobile-bento-card {
+    position: relative;
+    min-width: 0;
+    min-height: 126px;
+    overflow: hidden;
+    padding: 12px;
+    border: 1px solid rgba(177, 193, 218, 0.13);
+    border-radius: 14px;
+    background:
+      radial-gradient(circle at 100% 0%, rgba(128, 148, 255, 0.10), transparent 48%),
+      linear-gradient(145deg, rgba(31, 43, 64, 0.72), rgba(13, 21, 32, 0.88));
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.018);
+  }
+
+  .mobile-bento-card::after {
+    position: absolute;
+    right: -28px;
+    bottom: -36px;
+    width: 82px;
+    height: 82px;
+    content: "";
+    border: 1px solid rgba(145, 163, 255, 0.06);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .mobile-bento-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 15px;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  }
+
+  .mobile-bento-meta span {
+    color: #718097;
+    font-size: 6.3px;
+    font-weight: 750;
+    letter-spacing: 0.8px;
+  }
+
+  .mobile-bento-meta i {
+    padding: 3px 5px;
+    border: 1px solid rgba(154, 169, 255, 0.12);
+    border-radius: 999px;
+    color: #9daaff;
+    font-size: 5.8px;
+    font-style: normal;
+    font-weight: 800;
+    letter-spacing: 0.7px;
+  }
+
+  .mobile-bento-card h3 {
+    margin: 0 0 5px;
+    color: #edf2fb;
+    font-size: 13.4px;
+    line-height: 1.08;
+    letter-spacing: -0.35px;
+  }
+
+  .mobile-bento-card > p,
+  .mobile-bento-wide-copy p {
+    margin: 0 0 9px;
+    color: #7f8da2;
+    font-size: 7.8px;
+    line-height: 1.35;
+  }
+
+  .mobile-bento-tools {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .mobile-bento-tools span {
+    padding: 3px 5px;
+    border: 1px solid rgba(177, 193, 218, 0.10);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.018);
+    color: #a8b4c5;
+    font-size: 6.3px;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .mobile-bento-proof {
+    position: absolute;
+    right: 11px;
+    bottom: 10px;
+    left: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding-top: 7px;
+    border-top: 1px solid rgba(177, 193, 218, 0.08);
+    color: #b8c2d2;
+    font-size: 6.7px;
+    font-weight: 650;
+    line-height: 1.2;
+  }
+
+  .mobile-bento-proof span {
+    color: #a4b0ff;
+    font-size: 9px;
+  }
+
+  .mobile-bento-card-ml,
+  .mobile-bento-card-cv {
+    min-height: 151px;
+    padding-bottom: 37px;
+  }
+
+  .mobile-bento-card-wide {
+    grid-column: 1 / -1;
+    min-height: 86px;
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, .9fr);
+    gap: 14px;
+    align-items: end;
+    background:
+      linear-gradient(90deg, rgba(91, 111, 178, 0.13), transparent 42%),
+      linear-gradient(145deg, rgba(31, 43, 64, 0.62), rgba(13, 21, 32, 0.86));
+  }
+
+  .mobile-bento-card-wide .mobile-bento-meta {
+    margin-bottom: 8px;
+  }
+
+  .mobile-bento-card-wide .mobile-bento-tools {
+    align-content: end;
+    justify-content: flex-end;
+  }
+
+  .mobile-skills-bento-foundation {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 5px 7px;
+    margin-top: 12px;
+    padding: 11px 1px 0;
+    border-top: 1px solid rgba(177, 193, 218, 0.10);
+  }
+
+  .mobile-skills-bento-foundation > span {
+    width: 100%;
+    color: #6f7d91;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    font-size: 6px;
+    font-weight: 800;
+    letter-spacing: 1px;
+  }
+
+  .mobile-skills-bento-foundation strong {
+    color: #b4bfce;
+    font-size: 8.1px;
+    font-weight: 620;
+  }
+
+  .mobile-skills-bento-foundation i {
+    color: rgba(143, 161, 255, 0.42);
+    font-size: 7px;
+    font-style: normal;
+  }
+}
+
+@media (max-width: 380px) {
+  .mobile-skills-bento-grid {
+    gap: 7px;
+  }
+
+  .mobile-bento-card {
+    min-height: 120px;
+    padding: 10px;
+  }
+
+  .mobile-bento-card-ml,
+  .mobile-bento-card-cv {
+    min-height: 148px;
+    padding-bottom: 36px;
+  }
+
+  .mobile-bento-card h3 {
+    font-size: 12.5px;
+  }
+
+  .mobile-bento-card-wide {
+    min-height: 88px;
+    grid-template-columns: 1fr;
+    gap: 7px;
+  }
+
+  .mobile-bento-card-wide .mobile-bento-tools {
+    justify-content: flex-start;
+  }
+}
+
+/* Desktop Skills alignment v9 — six capabilities, 3 x 2 on wide screens */
+@media (min-width: 1100px) {
+  #competenze .skills-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  #competenze .skill-card,
+  #competenze .skill-card-featured,
+  #competenze .skill-card-wide {
+    grid-column: auto;
+    min-height: 300px;
   }
 }

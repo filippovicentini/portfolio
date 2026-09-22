@@ -1930,6 +1930,102 @@ footer h2 {
   margin-bottom: 22px;
 }
 
+
+/* Explicit project detail CTAs on desktop/tablet cards */
+.project-bottom--split,
+.project-bottom--actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.project-bottom--split {
+  justify-content: space-between;
+}
+
+.project-bottom--split > span {
+  min-width: 0;
+}
+
+.project-bottom--actions {
+  justify-content: flex-start;
+}
+
+.project-bottom--actions .project-github-link {
+  display: inline-flex;
+  min-height: 36px;
+  margin-left: auto;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 0 12px;
+  border: 1px solid rgba(199, 209, 226, 0.18);
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.025);
+  color: #bcc6d6;
+  font-size: 11px;
+  font-weight: 650;
+  line-height: 1;
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.project-bottom--actions .project-github-link:hover {
+  border-color: rgba(199, 209, 226, 0.34);
+  background: rgba(255, 255, 255, 0.055);
+  color: #f1f4f9;
+  transform: translateY(-1px);
+}
+
+.project-bottom--actions .project-github-link svg {
+  width: 15px;
+  height: 15px;
+  opacity: 0.72;
+}
+
+.project-detail-link {
+  display: inline-flex !important;
+  min-height: 36px;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center !important;
+  gap: 8px;
+  padding: 0 13px;
+  border: 1px solid rgba(177, 190, 255, 0.72);
+  border-radius: 9px;
+  background: linear-gradient(135deg, #aab7ff 0%, #8296ff 100%);
+  box-shadow: 0 7px 20px rgba(100, 122, 255, 0.18);
+  color: #0a0e18;
+  font-size: 11px;
+  font-weight: 800 !important;
+  line-height: 1;
+  transition:
+    filter 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.project-detail-link:hover {
+  box-shadow: 0 9px 24px rgba(100, 122, 255, 0.28);
+  color: #070a11;
+  filter: brightness(1.06);
+  transform: translateY(-1px);
+}
+
+.project-detail-link span {
+  font-size: 13px;
+  transition: transform 180ms ease;
+}
+
+.project-detail-link:hover span {
+  transform: translateX(2px);
+}
+
+
 @media (max-width: 980px) {
   .projects-featured,
   .projects-secondary {
@@ -5664,8 +5760,22 @@ body.command-open {
   }
 
   .mobile-project-actions a {
-    background: rgba(144, 161, 255, 0.08);
-    color: #dce3ff;
+    color: #c6cfdd;
+    background: rgba(255, 255, 255, 0.025);
+  }
+
+  .mobile-project-actions a:first-child {
+    border-color: rgba(177, 190, 255, 0.68);
+    background: linear-gradient(135deg, #aab7ff 0%, #8296ff 100%);
+    box-shadow: 0 5px 14px rgba(100, 122, 255, 0.16);
+    color: #0a0e18;
+    font-weight: 800;
+  }
+
+  .mobile-project-actions a:nth-child(2) {
+    border-color: rgba(199, 209, 226, 0.18);
+    background: rgba(255, 255, 255, 0.025);
+    color: #c2cbd8;
   }
 
   .mobile-project-action-muted {
@@ -6976,5 +7086,129 @@ body.command-open {
   #competenze .skill-card-wide {
     grid-column: auto;
     min-height: 300px;
+  }
+}
+
+/* Desktop Experience refinement — minimal career timeline */
+@media (min-width: 721px) {
+  #esperienza .experience-grid {
+    grid-template-columns: minmax(230px, 0.58fr) minmax(0, 1.42fr);
+    gap: clamp(56px, 7vw, 104px);
+  }
+
+  #esperienza .experience-intro {
+    position: sticky;
+    top: 118px;
+  }
+
+  #esperienza .experience-roles {
+    position: relative;
+    display: grid;
+    gap: 0;
+    padding-left: 42px;
+  }
+
+  #esperienza .experience-roles::before {
+    position: absolute;
+    top: 9px;
+    bottom: 12px;
+    left: 7px;
+    width: 1px;
+    content: "";
+    background: linear-gradient(
+      180deg,
+      rgba(151, 170, 255, 0.72),
+      rgba(151, 170, 255, 0.18) 72%,
+      rgba(151, 170, 255, 0.06)
+    );
+  }
+
+  #esperienza .experience-role,
+  #esperienza .experience-role-current {
+    position: relative;
+    overflow: visible;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  #esperienza .experience-role:not(:last-child) {
+    margin-bottom: 42px;
+    padding-bottom: 42px;
+    border-bottom: 1px solid rgba(177, 193, 218, 0.10);
+  }
+
+  #esperienza .experience-role::before,
+  #esperienza .experience-role-current::before {
+    position: absolute;
+    top: 4px;
+    left: -41px;
+    width: 11px;
+    height: 11px;
+    content: "";
+    border: 2px solid #0d1420;
+    border-radius: 50%;
+    background: #657288;
+    box-shadow: 0 0 0 4px rgba(101, 114, 136, 0.10);
+  }
+
+  #esperienza .experience-role-current::before {
+    background: #91a4ff;
+    box-shadow: 0 0 0 4px rgba(145, 164, 255, 0.13);
+  }
+
+  #esperienza .role-topline {
+    justify-content: flex-start;
+    gap: 12px;
+  }
+
+  #esperienza .experience-role h3 {
+    margin: 12px 0 4px;
+    font-size: clamp(27px, 2.35vw, 32px);
+    letter-spacing: -1.05px;
+  }
+
+  #esperienza .experience-role .company {
+    margin-bottom: 15px;
+  }
+
+  #esperienza .role-summary {
+    max-width: 760px;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  #esperienza .role-focus-grid,
+  #esperienza .role-focus-grid-compact {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px 32px;
+    margin-top: 22px;
+    padding-top: 19px;
+    border-top: 1px solid rgba(177, 193, 218, 0.09);
+  }
+
+  #esperienza .role-focus-grid > div,
+  #esperienza .role-focus-grid-compact > div {
+    min-height: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+  }
+
+  #esperienza .role-focus-grid span {
+    margin-bottom: 7px;
+    font-size: 8px;
+  }
+
+  #esperienza .role-focus-grid p {
+    font-size: 12.5px;
+    line-height: 1.6;
+  }
+
+  #esperienza .experience-project-link {
+    margin-top: 20px;
   }
 }
